@@ -1,4 +1,4 @@
-import WelcomeScreen from '../../../pages/Main/welcome-screen';
+import WelcomeScreen from '../../pages/Main/welcome-screen';
 
 type AppScreenProps = {
     filmName: string;
@@ -6,7 +6,9 @@ type AppScreenProps = {
     filmReleaseDate: number;
 }
 
-function App({filmName,filmGenre,filmReleaseDate}: AppScreenProps): JSX.Element {
+function App(props: AppScreenProps): JSX.Element {
+  const {filmName,filmGenre,filmReleaseDate} = props;
+
   return (
     <WelcomeScreen filmName={filmName} filmGenre={filmGenre} filmReleaseDate={filmReleaseDate}/>
   );

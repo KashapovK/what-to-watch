@@ -1,4 +1,6 @@
-function Card (): JSX.Element {
+import { Film } from "../../types";
+
+function Card (props: Film): JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">

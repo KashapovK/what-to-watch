@@ -1,12 +1,11 @@
 import Card from "../../components/card/card";
+import {Film} from "../../types";
 
-type WelcomeScreenProps = {
-    filmName: string;
-    filmGenre: string;
-    filmReleaseDate: number;
+type WelcomeScreenProps = Film & {
+    filmList: Film[];
 }
 
-function WelcomeScreen ({filmName,filmGenre,filmReleaseDate}: WelcomeScreenProps): JSX.Element {
+function WelcomeScreen ({filmName,filmGenre,filmReleaseDate,filmList}: WelcomeScreenProps): JSX.Element {
     return (
         <><section className="film-card">
             <div className="film-card__bg">
@@ -107,14 +106,13 @@ function WelcomeScreen ({filmName,filmGenre,filmReleaseDate}: WelcomeScreenProps
                     </ul>
 
                     <div className="catalog__films-list">
-                            <Card/>
-                            <Card/>
-                            <Card/>
-                            <Card/>
-                            <Card/>
-                            <Card/>
-                            <Card/>
-                            <Card/>
+                        {filmList.map(({filmName,filmGenre,filmReleaseDate}) => {
+                            <Card 
+                            filmName={filmName}
+                            filmGenre={filmGenre} 
+                            filmReleaseDate={filmReleaseDate}
+                            />
+                        })}
                     </div>
 
                     <div className="catalog__more">
