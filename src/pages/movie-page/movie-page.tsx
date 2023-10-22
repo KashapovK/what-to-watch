@@ -1,7 +1,7 @@
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
 
-function Films(): JSX.Element {
+function MoviePage(): JSX.Element {
     return (
         <><section className="film-card film-card--full">
             <div className="film-card__hero">
@@ -126,9 +126,9 @@ function Films(): JSX.Element {
                 </section>
 
                 <Footer/>
-
+                
             </div></>
     )
-}
+};
 
-export default Films;
+export default MoviePage;
