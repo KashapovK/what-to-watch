@@ -1,17 +1,19 @@
-import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
-import { Film, FilmCard } from "../../components/types";
-import MovieList from "../../components/movie-list/movie-list";
+import Footer from "../../components/footer/footer"
+import Header from "../../components/header/header"
+import { FilmCard, FilmReview } from "../../components/types"
+import MovieList from "../../components/movie-list/movie-list"
+import Review from "../../components/review.tsx/review"
 
-type MoviePageProps = FilmCard & {
+type MoviePageReviewProps = {
+    filmReview: FilmReview[],
     filmInfo: FilmCard,
-    film: Film,
-    filmProps: FilmCard[]
+    filmList: FilmCard[],
+    filmProps: FilmCard[],
 }
 
-function MoviePage({film, filmInfo, filmProps}:MoviePageProps): JSX.Element {
+function MoviePageReview({filmReview,filmInfo,filmList, filmProps}:MoviePageReviewProps):JSX.Element {
     return (
-        <><section className="film-card film-card--full">
+    <><section className="film-card film-card--full">
             <div className="film-card__hero">
                 <div className="film-card__bg">
                     <img src={filmInfo.posterImage} alt={filmInfo.name} />
@@ -58,48 +60,63 @@ function MoviePage({film, filmInfo, filmProps}:MoviePageProps): JSX.Element {
                     <div className="film-card__desc">
                         <nav className="film-nav film-card__nav">
                             <ul className="film-nav__list">
-                                <li className="film-nav__item film-nav__item--active">
+                                <li className="film-nav__item">
                                     <a href="#" className="film-nav__link">Overview</a>
                                 </li>
                                 <li className="film-nav__item">
                                     <a href="#" className="film-nav__link">Details</a>
                                 </li>
-                                <li className="film-nav__item">
+                                <li className="film-nav__item film-nav__item--active">
                                     <a href="#" className="film-nav__link">Reviews</a>
                                 </li>
                             </ul>
                         </nav>
 
-                        <div className="film-rating">
-                            <div className="film-rating__score">{film.rating} </div>
-                            <p className="film-rating__meta">
-                                <span className="film-rating__level">Very good</span>
-                                <span className="film-rating__count">{film.scoresCount}</span>
-                            </p>
-                        </div>
-
-                        <div className="film-card__text">
-                            <p>{film.description}</p>
-
-                            <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-
-                            <p className="film-card__starring"><strong>Starring: {film.starring}</strong></p>
+                        <div className="film-card__reviews film-card__row">
+                        {filmReview.map(({...filmReview}) => (
+                                <Review
+                                key={id}
+                                reviewText={reviewText}
+                                reviewRating={reviewRating}
+                                reviewAuthor={reviewAuthor}
+                                reviewDate={reviewDate}/>
+                            ))}
+                            <div className="film-card__reviews-col">
+                                {filmReview.map(({id,reviewText,reviewRating,reviewAuthor,reviewDate}) => (
+                                    <Review
+                                    key={id}
+                                    reviewText={reviewText}
+                                    reviewRating={reviewRating}
+                                    reviewAuthor={reviewAuthor}
+                                    reviewDate={reviewDate}/>
+                                ))}
+                            </div>
+                            <div className="film-card__reviews-col">
+                            {filmReview.map(({id,reviewText,reviewRating,reviewAuthor,reviewDate}) => (
+                                    <Review
+                                    key={id}
+                                    reviewText={reviewText}
+                                    reviewRating={reviewRating}
+                                    reviewAuthor={reviewAuthor}
+                                    reviewDate={reviewDate}/>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section><div className="page-content">
-                <section className="catalog catalog--like-this">
+                    <section className="catalog catalog--like-this">
                     <h2 className="catalog__title">More like this</h2>
 
-                    <MovieList filmProps={filmProps}/>
-
+                    <MovieList filmCardProps={filmList} filmProps={filmProps}/>
+                    
+                    <div/>
                 </section>
 
-                <Footer/>
-                
+                <Footer />
             </div></>
     )
 };
 
-export default MoviePage;
+export default MoviePageReview;
