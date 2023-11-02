@@ -1,24 +1,22 @@
 import { Route, BrowserRouter, Routes} from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute, AuthorizationStatus } from '../routes';
 import { HelmetProvider } from 'react-helmet-async';
-import WelcomeScreen from '../../pages/main/welcome-screen';
 import Login from '../../pages/sign-in/login';
-import MyList from '../../pages/my-list/mylist';
+import MyList from '../../pages/my-list/my-list';
 import Films from '../../pages/film/films';
-import AddReview from '../../pages/add-review/review';
+import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import ErrorPage from '../../pages/error-page/error-page';
 import PrivateRoute from '../private-route/private-route';
+import { Film, FilmCard } from '../types';
+import MainPage from '../../pages/main-page/main-page';
 
 type AppScreenProps = {
-    id: string;
-    filmName: string;
-    filmGenre: string;
-    filmReleaseDate: number;
+  filmProps: Film [];
+  filmList: FilmCard[];
 }
 
-function App(props: AppScreenProps): JSX.Element {
-  const {id, filmName,filmGenre,filmReleaseDate} = props;
+function App({filmList, filmProps}: AppScreenProps): JSX.Element {
 
   return (
     <HelmetProvider>
@@ -27,7 +25,7 @@ function App(props: AppScreenProps): JSX.Element {
           <Route>
             <Route
               path={AppRoute.Main}
-              element={<WelcomeScreen filmName={filmName} filmGenre={filmGenre} filmReleaseDate={filmReleaseDate} id={id} filmList={[]}/>}
+              element={<MainPage filmList={filmList} filmProps={filmProps} />}
             />
             <Route
               path={AppRoute.SignIn}
@@ -37,17 +35,17 @@ function App(props: AppScreenProps): JSX.Element {
               path={AppRoute.MyList}
               element={
                 <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                  <MyList />
+                  <MyList filmProps={filmProps}/>
                 </PrivateRoute>
               }
             />
             <Route
               path={AppRoute.Film}
-              element={<Films/>}
+              element={<Films filmList={filmList} filmProps={filmProps} />}
             />
             <Route
               path={AppRoute.AddReview}
-              element={<AddReview/>}
+              element={<AddReview filmList={filmList} />}
             />
             <Route
               path={AppRoute.NotFound}
@@ -57,7 +55,7 @@ function App(props: AppScreenProps): JSX.Element {
           <Route>
             <Route
               path={AppRoute.Player}
-              element={<Player/>}
+              element={<Player filmProps={filmProps} />}
             />
           </Route>
         </Routes>

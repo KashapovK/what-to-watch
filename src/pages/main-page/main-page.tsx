@@ -1,17 +1,18 @@
-import Card from "../../components/card/card";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import {Film} from "../../components/types";
+import {FilmCard, Film} from "../../components/types";
+import MovieList from "../../components/movie-list/movie-list";
 
-type WelcomeScreenProps = Film & {
-    filmList: Film[]
-}
+type MainPageProps = {
+    filmProps: Film ;
+    filmList: FilmCard[];
+  }
 
-function WelcomeScreen ({filmName,filmGenre,filmReleaseDate,filmList}: WelcomeScreenProps): JSX.Element {
+function MainPage ({filmList, filmProps}: MainPageProps): JSX.Element {
     return (
         <><section className="film-card">
             <div className="film-card__bg">
-                <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+                <img src={filmProps.backgroundImage} alt={filmProps.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -21,14 +22,14 @@ function WelcomeScreen ({filmName,filmGenre,filmReleaseDate,filmList}: WelcomeSc
             <div className="film-card__wrap">
                 <div className="film-card__info">
                     <div className="film-card__poster">
-                        <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+                        <img src={filmProps.posterImage} alt={filmProps.name} width="218" height="327" />
                     </div>
 
                     <div className="film-card__desc">
-                        <h2 className="film-card__title">{filmName}</h2>
+                        <h2 className="film-card__title">{filmProps.name}</h2>
                         <p className="film-card__meta">
-                            <span className="film-card__genre">{filmGenre}</span>
-                            <span className="film-card__year">{filmReleaseDate}</span>
+                            <span className="film-card__genre">{filmProps.genre}</span>
+                            <span className="film-card__year">{filmProps.releaseDate}</span>
                         </p>
 
                         <div className="film-card__buttons">
@@ -88,15 +89,7 @@ function WelcomeScreen ({filmName,filmGenre,filmReleaseDate,filmList}: WelcomeSc
                         </li>
                     </ul>
 
-                    <div className="catalog__films-list">
-                        {filmList.map(({id,filmName,filmGenre,filmReleaseDate}) => (
-                                <Card
-                                key={id}
-                                filmName={filmName}
-                                filmGenre={filmGenre}
-                                filmReleaseDate={filmReleaseDate} id={""}                                />
-                            ))}
-                    </div>
+                    <MovieList filmList={filmList}/>
 
                     <div className="catalog__more">
                         <button className="catalog__button" type="button">Show more</button>
@@ -109,4 +102,4 @@ function WelcomeScreen ({filmName,filmGenre,filmReleaseDate,filmList}: WelcomeSc
     )
 }
 
-export default WelcomeScreen;
+export default MainPage;
