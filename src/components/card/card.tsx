@@ -1,21 +1,22 @@
 import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../routes';
-import { Film } from '../types';
+import { FilmCard } from '../types';
+import VideoPlayer from '../video-player/video-player';
 
 type FilmCardProps = {
-  filmCardProps: Film;
+  filmInfo: FilmCard;
 }
 
-const Card = ({filmCardProps}: FilmCardProps) => {
+const Card = ({filmInfo}: FilmCardProps) => {
   const [isHover, setIsHover] = useState(false);
-  const [, setIsPlay] = useState(false);
+  const [IsPlay, setIsPlay] = useState(false);
 
   useEffect(() => {
     if (isHover) {
       const timer = setTimeout(() => {
         setIsPlay(true);
-      },500);
+      },1000);
       return () => clearTimeout(timer);
     }
   }, [isHover]);
@@ -36,11 +37,11 @@ const Card = ({filmCardProps}: FilmCardProps) => {
       onMouseOut={handleMouseOut}
     >
       <div className="small-film-card__image">
-        <img src={filmCardProps.posterImage} alt={filmCardProps.name} width="280" height="175"/>
+        <VideoPlayer video={IsPlay ? 'https://youtu.be/h8NrKjJPAuw' : ''} posterImage={filmInfo.posterImage} />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={AppRoute.Film.replace(':id', filmCardProps.id.toString())}>
-          {filmCardProps.name}
+        <Link className="small-film-card__link" to={AppRoute.Film.replace(':id', filmInfo.id.toString())}>
+          {filmInfo.name}
         </Link>
       </h3>
     </article>
