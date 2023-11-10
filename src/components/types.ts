@@ -10,7 +10,7 @@ export type Film = FilmCard & {
     releaseDate: number;
     genre: string;
     director: string;
-    starring: string;
+    starring: string [];
     runTime: string;
     video: string;
     isFavourite: boolean;
@@ -27,3 +27,17 @@ export type FilmReview = {
     reviewAuthor:string;
     reviewDate:string;
 };
+
+export enum EFilmPageTabs {
+    Overview = 'Overview',
+    Details = 'Details',
+    Reviews = 'Reviews',
+}
+
+export enum ERatingDescription {
+    Bad = 'Bad',
+    Normal = 'Normal',
+    NotBad = 'Not Bad',
+    Good = 'Good',
+    VeryGood = 'Very good',
+  }

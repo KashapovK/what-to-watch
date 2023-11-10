@@ -3,7 +3,7 @@ import { AppRoute, AuthorizationStatus } from '../routes';
 import { HelmetProvider } from 'react-helmet-async';
 import Login from '../../pages/sign-in/login';
 import MyList from '../../pages/my-list/my-list';
-import Films from '../../pages/film/films';
+import Films from '../../pages/film/film';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import ErrorPage from '../../pages/error-page/error-page';

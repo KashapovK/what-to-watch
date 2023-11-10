@@ -1,10 +1,10 @@
-import { FilmReview } from '../types';
+import { FilmReview } from '../../../../../components/types';
 
 type FilmReviewProps = {
   filmReview: FilmReview;
 }
 
-function Review({filmReview}:FilmReviewProps):JSX.Element {
+function Reviews({filmReview}:FilmReviewProps):JSX.Element {
   return (
     <div className="review">
       <blockquote className="review__quote">
@@ -21,4 +21,4 @@ function Review({filmReview}:FilmReviewProps):JSX.Element {
   );
 }
 
-export default Review;
+export default Reviews;

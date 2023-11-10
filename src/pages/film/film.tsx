@@ -4,13 +4,14 @@ import Header from "../../components/header/header";
 import { AppRoute } from "../../components/routes";
 import { Film } from "../../components/types";
 import MovieList from "../../components/movie-list/movie-list";
+import Tab from "./tabs/tabs";
+import MoreLikeThis from "../../components/more-like-this/more-like-this";
 
-type FilmsProps = Film & {
-    filmProps: Film,
-    filmList: Film[],
+type FilmProps = {
+    filmProps: Film,  
 } 
 
-function Films({filmProps,filmList}: FilmsProps): JSX.Element {
+function Film({filmProps}: FilmProps): JSX.Element {
     return (
         <><section className="film-card film-card--full">
             <div className="film-card__hero">
@@ -19,9 +20,7 @@ function Films({filmProps,filmList}: FilmsProps): JSX.Element {
                 </div>
 
                 <h1 className="visually-hidden">WTW</h1>
-
                 <Header/>
-
                 <div className="film-card__wrap">
                     <div className="film-card__desc">
                         <h2 className="film-card__title">{filmProps.name}</h2>
@@ -49,58 +48,17 @@ function Films({filmProps,filmList}: FilmsProps): JSX.Element {
                     </div>
                 </div>
             </div>
+            <Tab reviews={reviews} {...film}/>
+        </section>
 
-            <div className="film-card__wrap film-card__translate-top">
-                <div className="film-card__info">
-                    <div className="film-card__poster film-card__poster--big">
-                        <img src={filmProps.posterImage} alt={filmProps.name} width="218" height="327" />
-                    </div>
-
-                    <div className="film-card__desc">
-                        <nav className="film-nav film-card__nav">
-                            <ul className="film-nav__list">
-                                <li className="film-nav__item film-nav__item--active">
-                                    <a href="#" className="film-nav__link">Overview</a>
-                                </li>
-                                <li className="film-nav__item">
-                                    <a href="#" className="film-nav__link">Details</a>
-                                </li>
-                                <li className="film-nav__item">
-                                    <a href="#" className="film-nav__link">Reviews</a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <div className="film-rating">
-                            <div className="film-rating__score">{filmProps.rating}</div>
-                            <p className="film-rating__meta">
-                                <span className="film-rating__level">Very good</span>
-                                <span className="film-rating__count">{filmProps.scoresCount} ratings</span>
-                            </p>
-                        </div>
-
-                        <div className="film-card__text">
-                            <p>{filmProps.description}</p>
-
-                            <p className="film-card__director"><strong>Director: {filmProps.director}</strong></p>
-
-                            <p className="film-card__starring"><strong>Starring: {filmProps.starring}</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section><div className="page-content">
+        <div className="page-content">
                 <section className="catalog catalog--like-this">
                     <h2 className="catalog__title">More like this</h2>
-
-                    <MovieList filmCardProps={filmList} filmProps={filmProps}/>
-
+                    <MoreLikeThis filmCard={filmProps} />
                 </section>
-
                 <Footer/>
-
             </div></>
     )
 }
 
-export default Films;
+export default Film;
