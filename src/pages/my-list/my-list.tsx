@@ -1,13 +1,13 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { FilmCard } from '../../components/types';
+import { FilmCard } from '../../types/types';
 import MovieList from '../../components/movie-list/movie-list';
 
 type MyListProps = FilmCard & {
-  filmProps: FilmCard[];
+  filmCard: FilmCard[];
 }
 
-function MyList({filmProps}:MyListProps): JSX.Element {
+function MyList({filmCard}:MyListProps): JSX.Element {
   return (
     <div className="user-page">
 
@@ -16,7 +16,7 @@ function MyList({filmProps}:MyListProps): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MovieList filmProps={filmProps}/>
+        <MovieList filmCard={filmCard}/>
 
       </section>
 

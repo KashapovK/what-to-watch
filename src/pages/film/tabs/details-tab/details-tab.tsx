@@ -1,4 +1,4 @@
-import { Film } from '../../../../components/types';
+import { Film } from '../../../../types/types';
 
 export default function DetailsTab({genre, releaseDate, runTime, director, starring}: Film) {
   return (

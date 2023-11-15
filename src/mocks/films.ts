@@ -1,5 +1,5 @@
 import {v4 as uuidv4} from 'uuid';
-import { Film, FilmCard } from '../components/types';
+import { Film, FilmCard } from '../types/types';
 
 export const mockDataFilms: FilmCard [] = [
   {
@@ -49,7 +49,7 @@ export const mockDataPromo: Film [] = [
   {
     id: uuidv4(),
     name: 'The Grand Budapest Hotel',
-    genre: 'Drama, Comedy',
+    genre: 'Drama',
     releaseDate: 2014,
     director: 'Wes Anderson',
     starring: ['Bill Murray',

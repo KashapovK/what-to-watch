@@ -1,17 +1,17 @@
-import { FilmCard } from '../../components/types';
+import { FilmCard } from '../../types/types';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 
 type AddReviewProps = {
-  filmList: FilmCard;
+  filmCard: FilmCard;
 }
 
-function AddReview({filmList}:AddReviewProps): JSX.Element {
+function AddReview({filmCard}:AddReviewProps): JSX.Element {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={filmList.posterImage} alt={filmList.name} />
+          <img src={filmCard.posterImage} alt={filmCard.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -25,7 +25,7 @@ function AddReview({filmList}:AddReviewProps): JSX.Element {
             </a>
           </div>
 
-          <Breadcrumbs filmProps={filmList} />
+          <Breadcrumbs filmProps={filmCard} />
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -40,7 +40,7 @@ function AddReview({filmList}:AddReviewProps): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={filmList.posterImage} alt={filmList.name} width="218" height="327" />
+          <img src={filmCard.posterImage} alt={filmCard.name} width="218" height="327" />
         </div>
       </div>
 

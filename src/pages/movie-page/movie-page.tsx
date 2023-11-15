@@ -1,6 +1,6 @@
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import { Film, FilmCard } from "../../components/types";
+import { Film, FilmCard } from "../../types/types";
 import MovieList from "../../components/movie-list/movie-list";
 
 type MoviePageProps = FilmCard & {

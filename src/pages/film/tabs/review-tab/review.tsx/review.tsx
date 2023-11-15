@@ -1,4 +1,4 @@
-import { FilmReview } from '../../../../../components/types';
+import { FilmReview } from '../../../../../types/types';
 
 type FilmReviewProps = {
   filmReview: FilmReview;

@@ -1,14 +1,14 @@
 import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../routes';
-import { FilmCard } from '../types';
+import { AppRoute } from '../../const/const';
+import { FilmCard } from '../../types/types';
 import VideoPlayer from '../video-player/video-player';
 
 type FilmCardProps = {
-  filmInfo: FilmCard;
+  filmCard: FilmCard;
 }
 
-const Card = ({filmInfo}: FilmCardProps) => {
+const Card = ({filmCard}: FilmCardProps) => {
   const [isHover, setIsHover] = useState(false);
   const [IsPlay, setIsPlay] = useState(false);
 
@@ -37,11 +37,11 @@ const Card = ({filmInfo}: FilmCardProps) => {
       onMouseOut={handleMouseOut}
     >
       <div className="small-film-card__image">
-        <VideoPlayer video={IsPlay ? 'https://youtu.be/h8NrKjJPAuw' : ''} posterImage={filmInfo.posterImage} />
+        <VideoPlayer video={IsPlay ? 'https://youtu.be/h8NrKjJPAuw' : ''} posterImage={filmCard.posterImage} />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={AppRoute.Film.replace(':id', filmInfo.id.toString())}>
-          {filmInfo.name}
+        <Link className="small-film-card__link" to={AppRoute.Film.replace(':id', filmCard.id.toString())}>
+          {filmCard.name}
         </Link>
       </h3>
     </article>

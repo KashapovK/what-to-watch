@@ -1,18 +1,31 @@
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import {FilmCard, Film} from "../../components/types";
+import {FilmCard, Film} from "../../types/types";
 import MovieList from "../../components/movie-list/movie-list";
+import GenreList from "../../components/genre-list/genre-list";
+import { useAppSelector } from "../../hooks";
+import { useDispatch } from "react-redux";
+import { setFilms } from "../../store/action";
+import { useEffect } from "react";
 
 type MainPageProps = {
-    filmProps: Film ;
-    filmList: FilmCard[];
+    selectedFilm: Film;
+    films: FilmCard[];
   }
 
-function MainPage ({filmList, filmProps}: MainPageProps): JSX.Element {
+export default function MainPage ({selectedFilm, films}: MainPageProps) {
+        const filteredFilms: FilmCard [] = useAppSelector((state) =>
+    state.filteredFilms);
+        const dispatch = useDispatch();
+
+        useEffect(() => {
+            dispatch (setFilms(films));
+        }, [dispatch, films]);
+
     return (
         <><section className="film-card">
             <div className="film-card__bg">
-                <img src={filmProps.backgroundImage} alt={filmProps.name} />
+                <img src={selectedFilm.backgroundImage} alt={selectedFilm.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -22,14 +35,14 @@ function MainPage ({filmList, filmProps}: MainPageProps): JSX.Element {
             <div className="film-card__wrap">
                 <div className="film-card__info">
                     <div className="film-card__poster">
-                        <img src={filmProps.posterImage} alt={filmProps.name} width="218" height="327" />
+                        <img src={selectedFilm.posterImage} alt={selectedFilm.name} width="218" height="327" />
                     </div>
 
                     <div className="film-card__desc">
-                        <h2 className="film-card__title">{filmProps.name}</h2>
+                        <h2 className="film-card__title">{selectedFilm.name}</h2>
                         <p className="film-card__meta">
-                            <span className="film-card__genre">{filmProps.genre}</span>
-                            <span className="film-card__year">{filmProps.releaseDate}</span>
+                            <span className="film-card__genre">{selectedFilm.genre}</span>
+                            <span className="film-card__year">{selectedFilm.releaseDate}</span>
                         </p>
 
                         <div className="film-card__buttons">
@@ -56,40 +69,9 @@ function MainPage ({filmList, filmProps}: MainPageProps): JSX.Element {
                 <section className="catalog">
                     <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-                    <ul className="catalog__genres-list">
-                        <li className="catalog__genres-item catalog__genres-item--active">
-                            <a href="#" className="catalog__genres-link">All genres</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Comedies</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Crime</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Documentary</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Dramas</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Horror</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Kids & Family</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Romance</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Sci-Fi</a>
-                        </li>
-                        <li className="catalog__genres-item">
-                            <a href="#" className="catalog__genres-link">Thrillers</a>
-                        </li>
-                    </ul>
+                    <GenreList/>
 
-                    <MovieList filmList={filmList}/>
+                    <MovieList filmCard={filteredFilms}/>
 
                     <div className="catalog__more">
                         <button className="catalog__button" type="button">Show more</button>
@@ -101,5 +83,3 @@ function MainPage ({filmList, filmProps}: MainPageProps): JSX.Element {
         </div></>
     )
 }
-
-export default MainPage;

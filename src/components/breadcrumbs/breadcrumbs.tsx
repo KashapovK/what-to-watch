@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../routes';
-import { FilmCard } from '../types';
+import { AppRoute } from '../../const/const';
+import { FilmCard } from '../../types/types';
 
 type BreadcrumbsProps = {
   filmProps: FilmCard;
