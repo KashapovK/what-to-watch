@@ -1,8 +1,8 @@
 import Card from '../card/card';
-import { FilmCard } from '../types';
+import { FilmCard } from '../../types/types';
 
 type MoreLikeThisProps = {
-    filmCard: FilmCard;
+    filmCard: FilmCard[];
 }
 export default function MoreLikeThis ({filmCard}:MoreLikeThisProps) {
 

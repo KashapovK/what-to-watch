@@ -1,4 +1,4 @@
-import { FilmReview } from '../../../../components/types';
+import { FilmReview } from '../../../../types/types';
 import Reviews from './review.tsx/review';
 
 type ReviewTabProps = {

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { getRatingDescription } from '../../../../components/rating-description';
-import { Film } from '../../../../components/types';
+import { getRatingDescription } from '../../../../components/rating-description/rating-description';
+import { Film } from '../../../../types/types';
 
 export default function OverviewTab ({rating, description, scoresCount, director, starring}:Film) {
   const ratingDescription = useMemo(() => getRatingDescription(rating), [rating]);

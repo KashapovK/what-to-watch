@@ -1,4 +1,4 @@
-import { FilmReview } from '../components/types';
+import { FilmReview } from '../types/types';
 import {v4 as uuidv4} from 'uuid';
 
 const mockDataReviews: FilmReview [] = [

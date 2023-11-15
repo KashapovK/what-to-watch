@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes} from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../routes';
+import { AppRoute, AuthorizationStatus } from '../../const/const';
 import { HelmetProvider } from 'react-helmet-async';
 import Login from '../../pages/sign-in/login';
 import MyList from '../../pages/my-list/my-list';
@@ -8,15 +8,15 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import ErrorPage from '../../pages/error-page/error-page';
 import PrivateRoute from '../private-route/private-route';
-import { Film, FilmCard } from '../types';
+import { Film, FilmCard } from '../../types/types';
 import MainPage from '../../pages/main-page/main-page';
 
 type AppScreenProps = {
   filmProps: Film [];
-  filmList: FilmCard[];
+  filmCard: FilmCard[];
 }
 
-function App({filmList, filmProps}: AppScreenProps): JSX.Element {
+function App({filmCard, filmProps}: AppScreenProps): JSX.Element {
 
   return (
     <HelmetProvider>
@@ -25,7 +25,7 @@ function App({filmList, filmProps}: AppScreenProps): JSX.Element {
           <Route>
             <Route
               path={AppRoute.Main}
-              element={<MainPage filmList={filmList} filmProps={filmProps} />}
+              element={<MainPage films={filmCard} filmProps={filmProps} />}
             />
             <Route
               path={AppRoute.SignIn}
@@ -41,11 +41,11 @@ function App({filmList, filmProps}: AppScreenProps): JSX.Element {
             />
             <Route
               path={AppRoute.Film}
-              element={<Films filmList={filmList} filmProps={filmProps} />}
+              element={<Films filmCard={filmCard} filmProps={filmProps} />}
             />
             <Route
               path={AppRoute.AddReview}
-              element={<AddReview filmList={filmList} />}
+              element={<AddReview filmCard={filmCard} />}
             />
             <Route
               path={AppRoute.NotFound}

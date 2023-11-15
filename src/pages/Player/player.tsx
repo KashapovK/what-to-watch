@@ -1,4 +1,4 @@
-import type { Film } from '../../components/types';
+import type { Film } from '../../types/types';
 
 type PlayerProps = {
   filmProps: Film;

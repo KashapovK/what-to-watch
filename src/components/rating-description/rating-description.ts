@@ -1,4 +1,4 @@
-import { ERatingDescription } from './types';
+import { ERatingDescription } from '../../types/types';
 
 export function getRatingDescription(rating:number): ERatingDescription {
   if (rating >= 0 && rating < 2) {

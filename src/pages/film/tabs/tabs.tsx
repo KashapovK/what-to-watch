@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import { EFilmPageTabs, Film, FilmReview } from '../../../components/types';
+import { EFilmPageTabs, Film, FilmReview } from '../../../types/types';
 import OverviewTab from './overview-tab/overview-tab';
 import ReviewTab from './review-tab/review-tab';
 import DetailsTab from './details-tab/details-tab';

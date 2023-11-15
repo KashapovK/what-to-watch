@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import { AppRoute } from "../../components/routes";
-import { Film } from "../../components/types";
+import { AppRoute } from "../../const/const";
+import { FilmCard, Film as FilmType } from "../../types/types";
 import MovieList from "../../components/movie-list/movie-list";
 import Tab from "./tabs/tabs";
 import MoreLikeThis from "../../components/more-like-this/more-like-this";
 
 type FilmProps = {
-    filmProps: Film,  
+    filmProps: FilmType,
+    filmCard: FilmCard,
 } 
 
-function Film({filmProps}: FilmProps): JSX.Element {
+function Film({filmProps, filmCard}: FilmProps): JSX.Element {
     return (
         <><section className="film-card film-card--full">
             <div className="film-card__hero">
@@ -54,7 +55,7 @@ function Film({filmProps}: FilmProps): JSX.Element {
         <div className="page-content">
                 <section className="catalog catalog--like-this">
                     <h2 className="catalog__title">More like this</h2>
-                    <MoreLikeThis filmCard={filmProps} />
+                    <MoreLikeThis filmCard={filmCard} />
                 </section>
                 <Footer/>
             </div></>
