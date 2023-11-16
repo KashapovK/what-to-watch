@@ -3,3 +3,4 @@ import { FilmCard } from '../types/types';
 
 export const setFilms = createAction<FilmCard[]> ('setFilms');
 export const setSelectedGenre = createAction<string>('setSelectedGenre');
+export const showMoreFilms = createAction('showMoreFilms');

@@ -1,22 +1,22 @@
 import { FilmReview } from '../../../../../types/types';
 
 type FilmReviewProps = {
-  filmReview: FilmReview;
+  reviews: FilmReview;
 }
 
-function Reviews({filmReview}:FilmReviewProps):JSX.Element {
+function Reviews({reviews}:FilmReviewProps):JSX.Element {
   return (
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{filmReview.reviewText}</p>
+        <p className="review__text">{reviews.reviewText}</p>
 
         <footer className="review__details">
-          <cite className="review__author">{filmReview.reviewAuthor}</cite>
-          <time className="review__date">{filmReview.reviewDate}</time>
+          <cite className="review__author">{reviews.reviewAuthor}</cite>
+          <time className="review__date">{reviews.reviewDate}</time>
         </footer>
       </blockquote>
 
-      <div className="review__rating">{filmReview.reviewRating}</div>
+      <div className="review__rating">{reviews.reviewRating}</div>
     </div>
   );
 }
