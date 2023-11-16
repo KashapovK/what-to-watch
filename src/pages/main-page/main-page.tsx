@@ -6,6 +6,7 @@ import GenreList from "../../components/genre-list/genre-list";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setFilms } from "../../store/action";
 import { useEffect } from "react";
+import ShowMoreFilms from "../../components/show-more-films/show-more-films";
 
 type MainPageProps = {
     selectedFilm: Film;
@@ -13,8 +14,7 @@ type MainPageProps = {
   }
 
 export default function MainPage ({selectedFilm, films}: MainPageProps) {
-        const filteredFilms: FilmCard [] = useAppSelector((state) =>
-    state.filteredFilms);
+        const {filmListSize} = useAppSelector((state) => state);
         const dispatch = useAppDispatch();
 
         useEffect(() => {
@@ -70,11 +70,10 @@ export default function MainPage ({selectedFilm, films}: MainPageProps) {
 
                     <GenreList/>
 
-                    <MovieList filmCard={filteredFilms}/>
+                    <MovieList filmCard={filmListSize}/>
 
-                    <div className="catalog__more">
-                        <button className="catalog__button" type="button">Show more</button>
-                    </div>
+                    <ShowMoreFilms />
+                    
                 </section>
 
             <Footer/>

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
 import { AppRoute } from "../../const/const";
-import { FilmCard, Film as FilmType } from "../../types/types";
+import { FilmCard, FilmReview, Film as FilmType } from "../../types/types";
 import MovieList from "../../components/movie-list/movie-list";
 import Tab from "./tabs/tabs";
 import MoreLikeThis from "../../components/more-like-this/more-like-this";
@@ -10,9 +10,10 @@ import MoreLikeThis from "../../components/more-like-this/more-like-this";
 type FilmProps = {
     filmProps: FilmType,
     filmCard: FilmCard,
+    reviews: FilmReview,
 } 
 
-function Film({filmProps, filmCard}: FilmProps): JSX.Element {
+function Film({filmProps, filmCard, reviews}: FilmProps): JSX.Element {
     return (
         <><section className="film-card film-card--full">
             <div className="film-card__hero">
