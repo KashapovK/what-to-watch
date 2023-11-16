@@ -1,9 +1,9 @@
 export type FilmCard = {
     id: string;
     name: string;
-    posterImage?: string;
-    releaseDate?: number;
-    genre?: string;
+    posterImage: string;
+    releaseDate: number;
+    genre: string;
 };
 
 export type Film = FilmCard & {
