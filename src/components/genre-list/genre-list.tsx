@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { setSelectedGenre } from '../../store/action';
 
 export default function GenreList() {
-  const {genres, selectedGenre } = useAppSelector((state) => state);
+  const {genres, selectedGenre } = useAppSelector((state) => state.film);
   const dispatch = useAppDispatch();
 
   function handleGenreChange(value: string) {
