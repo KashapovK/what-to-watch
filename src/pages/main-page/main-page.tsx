@@ -1,30 +1,28 @@
 import Footer from "../../components/footer/footer";
 import Header from "../../components/header/header";
-import {FilmCard, Film} from "../../types/types";
 import MovieList from "../../components/movie-list/movie-list";
 import GenreList from "../../components/genre-list/genre-list";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setFilms } from "../../store/action";
 import { useEffect } from "react";
 import ShowMoreFilms from "../../components/show-more-films/show-more-films";
+import { loadPromoFilm } from "../../store/api-actions";
+import RequestSuspense from "../../components/request-suspense/request-suspense";
 
-type MainPageProps = {
-    selectedFilm: Film;
-    films: FilmCard[];
-  }
-
-export default function MainPage ({selectedFilm, films}: MainPageProps) {
-        const {filmListSize} = useAppSelector((state) => state);
+export default function MainPage () {
+        const {filmListSize, promoFilm} = useAppSelector((state) => state.film);
         const dispatch = useAppDispatch();
 
         useEffect(() => {
-            dispatch (setFilms(films));
-        }, [dispatch, films]);
+            dispatch (loadPromoFilm());
+        }, [dispatch]);
 
     return (
-        <><section className="film-card">
+        <RequestSuspense>
+        <>
+        {promoFilm && (
+        <section className="film-card">
             <div className="film-card__bg">
-                <img src={selectedFilm.backgroundImage} alt={selectedFilm.name} />
+                <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -34,14 +32,14 @@ export default function MainPage ({selectedFilm, films}: MainPageProps) {
             <div className="film-card__wrap">
                 <div className="film-card__info">
                     <div className="film-card__poster">
-                        <img src={selectedFilm.posterImage} alt={selectedFilm.name} width="218" height="327" />
+                        <img src={promoFilm.posterImage} alt={`$promoFilm.name} poster`} width="218" height="327" />
                     </div>
 
                     <div className="film-card__desc">
-                        <h2 className="film-card__title">{selectedFilm.name}</h2>
+                        <h2 className="film-card__title">{promoFilm.name}</h2>
                         <p className="film-card__meta">
-                            <span className="film-card__genre">{selectedFilm.genre}</span>
-                            <span className="film-card__year">{selectedFilm.releaseDate}</span>
+                            <span className="film-card__genre">{promoFilm.genre}</span>
+                            <span className="film-card__year">{promoFilm.released}</span>
                         </p>
 
                         <div className="film-card__buttons">
@@ -63,21 +61,17 @@ export default function MainPage ({selectedFilm, films}: MainPageProps) {
                 </div>
             </div>
         </section>
+        )}
         
         <div className="page-content">
                 <section className="catalog">
                     <h2 className="catalog__title visually-hidden">Catalog</h2>
-
                     <GenreList/>
-
-                    <MovieList filmCard={filmListSize}/>
-
+                    <MovieList prop={filmListSize}/>
                     <ShowMoreFilms />
-                    
                 </section>
-
             <Footer/>
-            
         </div></>
+        </RequestSuspense>
     )
 }

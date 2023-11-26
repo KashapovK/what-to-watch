@@ -1,13 +1,8 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { FilmCard } from '../../types/types';
 import MovieList from '../../components/movie-list/movie-list';
 
-type MyListProps = FilmCard & {
-  filmCard: FilmCard[];
-}
-
-function MyList({filmCard}:MyListProps): JSX.Element {
+export default function MyList() {
   return (
     <div className="user-page">
 
@@ -16,7 +11,7 @@ function MyList({filmCard}:MyListProps): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MovieList filmCard={filmCard}/>
+        <MovieList prop={filmCard}/>
 
       </section>
 
@@ -25,5 +20,3 @@ function MyList({filmCard}:MyListProps): JSX.Element {
     </div>
   );
 }
-
-export default MyList;

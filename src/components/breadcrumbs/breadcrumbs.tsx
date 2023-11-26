@@ -1,27 +1,27 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
-import { FilmCard } from '../../types/types';
 
 type BreadcrumbsProps = {
-  filmProps: FilmCard;
+  id: string;
+  name: string;
 }
 
-function Breadcrumbs({filmProps}:BreadcrumbsProps):JSX.Element {
+export default function Breadcrumbs({id, name}:BreadcrumbsProps):JSX.Element {
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
         <li className="breadcrumbs__item">
-          <Link to={AppRoute.Film}
+          <Link to={AppRoute.Film.replace(':id', id)}
             className="breadcrumbs__link"
-          >{filmProps.name}
+          >{name}
           </Link>
         </li>
         <li className="breadcrumbs__item">
-          <a className="breadcrumbs__link">Add review</a>
+          <Link className="breadcrumbs__link" to={AppRoute.AddReview.replace(':id', id)}>
+            Add review
+          </Link>
         </li>
       </ul>
     </nav>
   );
 }
-
-export default Breadcrumbs;

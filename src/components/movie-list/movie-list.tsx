@@ -1,22 +1,16 @@
-import { useState } from 'react';
 import { FilmCard } from '../../types/types';
 import Card from '../card/card';
 
 type MovieListProps = {
-    filmCard: FilmCard [];
+    prop: FilmCard [];
 }
 
-export default function MovieList({filmCard}:MovieListProps): JSX.Element {
-  const [, setActiveCard] = useState<string>();
-
-  const handleMouseOver = (id:string) => {
-    setActiveCard(id);
-  };
+export default function MovieList({prop}:MovieListProps) {
 
   return (
     <div className="catalog__films-list">
-      {filmCard.map((value) => (
-        <Card key={value.id} onMouseOver={handleMouseOver} {...value} />
+      {prop.map((value) => (
+        <Card key={value.id} {...value} />
       ))}
     </div>
   );

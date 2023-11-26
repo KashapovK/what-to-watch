@@ -1,17 +1,35 @@
-type VideoPlayerProps = {
+import { forwardRef, memo } from 'react';
+
+export type VideoPlayerProps = {
     video: string;
     posterImage: string;
+    onTimeUpdate?: () => void;
+    muted?: boolean;
+    autoPlay?: boolean;
 }
 
-export default function VideoPlayer({video, posterImage }:VideoPlayerProps): JSX.Element {
-  return (
-    <video
-      src={video}
-      poster={posterImage}
-      width="280"
-      height="175"
-      muted
-      autoPlay
-    />
-  );
-}
+const Player = forwardRef<HTMLVideoElement, VideoPlayerProps>((
+  {
+    video,
+    posterImage,
+    onTimeUpdate,
+    muted = false,
+    autoPlay = false,
+  },
+  ref
+) => (
+  <video
+    ref={ref}
+    className="player__video"
+    poster={posterImage}
+    onTimeUpdate={onTimeUpdate}
+    muted={muted}
+    autoPlay={autoPlay}
+  >
+    <source src={video} />
+  </video>
+));
+
+Player.displayName = 'VideoPlayer';
+
+export const VideoPlayer = memo(Player);
