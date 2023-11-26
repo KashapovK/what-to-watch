@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const/const';
 
-const ErrorPage = () => (
-  <><h1>404 Not Found</h1>
-    <Link to="/">Go to Main Page</Link>
-  </>
-);
-
-export default ErrorPage;
+export default function ErrorPage() {
+  return (
+    <><h1>404 Not Found</h1>
+      <Link to={AppRoute.Main}>Вернуться на главную страницу</Link>
+    </>
+  );
+}

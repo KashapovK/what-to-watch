@@ -1,44 +1,89 @@
-import type { Film } from '../../types/types';
+import { useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelectedFilm } from '../../hooks/useSelectedFilm';
+import RequestSuspense from '../../components/request-suspense/request-suspense';
+import { VideoPlayer } from '../../components/video-player/video-player';
+import { AppRoute } from '../../const/const';
+import TimeControl from './time-control/time-control';
 
-type PlayerProps = {
-  filmProps: Film;
-}
+export default function Player() {
+  const playerRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [time, setTime] = useState<number>(0);
+  const navigate = useNavigate();
+  const { id = '' } = useParams();
+  const { selectedFilm } = useSelectedFilm({});
 
-function Player({filmProps}:PlayerProps): JSX.Element {
+  function handlePlay() {
+    playerRef.current?.play();
+    setIsPlaying(true);
+  }
+  function handlePause() {
+    playerRef.current?.pause();
+    setIsPlaying(false);
+  }
+  function handleTimeUpdate() {
+    setTime(Number(playerRef.current?.currentTime));
+  }
+  function handleFullScreenToggle() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      containerRef.current?.requestFullscreen();
+    }
+  }
   return (
-    <div className="player">
-      <video src={filmProps.video} className="player__video" poster={filmProps.posterImage}></video>
+    <RequestSuspense>
+      <div className="player" ref={containerRef}>
+        {selectedFilm && (
+          <>
+            <VideoPlayer
+              video={selectedFilm.videoLink}
+              posterImage={selectedFilm.posterImage}
+              ref={playerRef}
+              onTimeUpdate={handleTimeUpdate}
+            />
 
-      <button type="button" className="player__exit">Exit</button>
+            <button
+              type="button"
+              className="player__exit"
+              onClick={() =>
+                navigate(AppRoute.Film.replace(':id', id))}
+            >
+               Exit
+            </button>
 
-      <div className="player__controls">
-        <div className="player__controls-row">
-          <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style="left: 30%;">Toggler</div>
-          </div>
-          <div className="player__time-value">{filmProps.runTime}</div>
-        </div>
-
-        <div className="player__controls-row">
-          <button type="button" className="player__play">
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
-            </svg>
-            <span>Play</span>
-          </button>
-          <div className="player__name">{filmProps.name}</div>
-
-          <button type="button" className="player__full-screen">
-            <svg viewBox="0 0 27 27" width="27" height="27">
-              <use xlinkHref="#full-screen"></use>
-            </svg>
-            <span>Full screen</span>
-          </button>
-        </div>
+            <div className="player__controls">
+              {playerRef.current && <TimeControl time={time} duration={Number(playerRef.current?.duration)} />}
+              <div className="player__controls-row">
+                {isPlaying ? (
+                  <button type="button" className="player__play" onClick={handlePause}>
+                    <svg viewBox="0 0 14 21" width="14" height="21">
+                      <use xlinkHref="#pause"></use>
+                    </svg>
+                    <span>Pause</span>
+                  </button>
+                ) : (
+                  <button type="button" className="player__play" onClick={handlePlay}>
+                    <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#play-s"></use>
+                    </svg>
+                    <span>Play</span>
+                  </button>
+                )}
+                <div className="player__name">{selectedFilm.name}</div>
+                <button type="button" className="player__full-screen" onClick={handleFullScreenToggle}>
+                  <svg viewBox="0 0 27 27" width="27" height="27">
+                    <use xlinkHref="#full-screen"></use>
+                  </svg>
+                  <span>Full screen</span>
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
-    </div>
+    </RequestSuspense>
   );
 }
-
-export default Player;

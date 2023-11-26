@@ -14,3 +14,17 @@ export enum AuthorizationStatus {
     NoAuth = 'NO_AUTH',
     Unknown = 'UNKNOWN'
 }
+
+export enum EFilmPageTabs {
+    Overview = 'Overview',
+    Details = 'Details',
+    Reviews = 'Reviews',
+}
+
+export enum ERatingDescription {
+    Bad = 'Bad',
+    Normal = 'Normal',
+    Good = 'Good',
+    VeryGood = 'Very good',
+    Awesome = 'Awesome'
+  }

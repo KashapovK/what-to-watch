@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { showMoreFilms } from '../../store/action';
+import { showMoreFilms } from '../../store/film';
 
 export default function ShowMoreFilms() {
   const {filteredFilms, filmListMaxLength} = useAppSelector ((state) => state.film);

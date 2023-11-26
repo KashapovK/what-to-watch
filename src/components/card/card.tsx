@@ -4,11 +4,7 @@ import { AppRoute } from '../../const/const';
 import { FilmCard } from '../../types/types';
 import VideoPlayer from '../video-player/video-player';
 
-type FilmCardProps = {
-  filmCard: FilmCard;
-}
-
-const Card = ({filmCard}: FilmCardProps) => {
+const Card = ({id, name, previewImage, previewVideoLink}: FilmCard) => {
   const [isHover, setIsHover] = useState(false);
   const [IsPlay, setIsPlay] = useState(false);
 
@@ -37,11 +33,11 @@ const Card = ({filmCard}: FilmCardProps) => {
       onMouseOut={handleMouseOut}
     >
       <div className="small-film-card__image">
-        <VideoPlayer video={IsPlay ? 'https://youtu.be/h8NrKjJPAuw' : ''} posterImage={filmCard.posterImage} />
+        <VideoPlayer video={IsPlay ? previewVideoLink : ''} posterImage={previewImage} muted autoPlay/>
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={AppRoute.Film.replace(':id', filmCard.id.toString())}>
-          {filmCard.name}
+        <Link className="small-film-card__link" to={AppRoute.Film.replace(':id', id.toString())}>
+          {name}
         </Link>
       </h3>
     </article>
