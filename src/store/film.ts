@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {Film, FilmCard} from '../types/types';
 import {ALL_GENRES, FILM_LIST_SIZE, SUGGESTION_SIZE} from '../const/film';
-import { loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions } from './api-actions';
+import { loadFavouriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions, setIsFavorite } from './api-actions';
 
 
 type FilmSliceState = {
@@ -13,10 +13,9 @@ type FilmSliceState = {
   filmListMaxLength: number;
   suggestions: FilmCard[];
   suggestion: FilmCard[];
-  promoFilm?: Film;
   selectedFilm?: Film;
+  favouriteFilms: FilmCard[];
 };
-
 
 const initialState: FilmSliceState = {
   films: [],
@@ -27,7 +26,12 @@ const initialState: FilmSliceState = {
   filmListMaxLength: FILM_LIST_SIZE,
   suggestions: [],
   suggestion: [],
+  favouriteFilms: [],
 };
+
+function setSelectedFilm(state: FilmSliceState, action: PayloadAction<Film>) {
+  state.selectedFilm = action.payload;
+}
 
 const filmSlice = createSlice({
   name: 'film',
@@ -72,23 +76,22 @@ const filmSlice = createSlice({
         filmListPortion: action.payload.slice(0, FILM_LIST_SIZE),
       }
     ));
-    builder.addCase(loadPromoFilm.fulfilled, (state, action: PayloadAction<Film>) => (
-      {
-        ...state,
-        promoFilm: action.payload,
-      }
-    ));
-    builder.addCase(loadFilmDetails.fulfilled, (state, action: PayloadAction<Film>) => (
-      {
-        ...state,
-        selectedFilm: action.payload,
-      }
-    ));
+    builder.addCase(loadPromoFilm.fulfilled, setSelectedFilm);
+    builder.addCase(loadFilmDetails.fulfilled, setSelectedFilm);
+    builder.addCase(setIsFavorite.fulfilled, setSelectedFilm);
     builder.addCase(loadSuggestions.fulfilled, (state, action: PayloadAction<FilmCard[]>) => (
       {
         ...state,
         suggestions: action.payload,
         suggestionPortion: action.payload.slice(0, SUGGESTION_SIZE),
+      }
+    ));
+    builder.addCase(loadFavouriteFilms.fulfilled, (state, action: PayloadAction<FilmCard[]>) => (
+      {
+        ...state,
+        suggestions: action.payload,
+        suggestionPortion: action.payload.slice(0, SUGGESTION_SIZE),
+        favouriteFilms: action.payload,
       }
     ));
   },

@@ -1,0 +1,19 @@
+.not-found-description {
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    font-size: 45px;
+  }
+  
+  .redirect-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+  }

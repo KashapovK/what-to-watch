@@ -2,7 +2,7 @@ import { useState, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import signIn from '../sign-in';
-import { AppRoute } from '../../../const/const';
+import { AppRoute, AuthorizationStatus } from '../../../const/const';
 
 type FormFields = {
     email: string;
@@ -18,7 +18,7 @@ export default function SignInForm() {
   const [formValues, setFormValues] = useState<FormFields>(INITIAL_FORM_STATE);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { isAuthorized } = useAppSelector((state) => state.user);
+  const { authorizationStatus } = useAppSelector((state) => state.user);
 
   function handleFormChange(updatedValues: Partial<FormFields>) {
     setFormValues((values) => ({ ...values, ...updatedValues }));
@@ -30,10 +30,10 @@ export default function SignInForm() {
   }
 
   useEffect(() => {
-    if (isAuthorized) {
+    if (authorizationStatus === AuthorizationStatus.Authorized) {
       navigate(AppRoute.Main);
     }
-  }, [isAuthorized, navigate]);
+  }, [authorizationStatus, navigate]);
 
   return (
     <form onSubmit={handleSubmit} className="sign-in__form">
