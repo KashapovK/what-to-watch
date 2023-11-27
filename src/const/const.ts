@@ -12,7 +12,8 @@ export enum AppRoute {
 export enum AuthorizationStatus {
     Auth = 'AUTH',
     NoAuth = 'NO_AUTH',
-    Unknown = 'UNKNOWN'
+    Unknown = 'UNKNOWN',
+    Authorized = 'Authorized'
 }
 
 export enum EFilmPageTabs {

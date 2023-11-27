@@ -10,13 +10,19 @@ import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
 import SignIn from '../../pages/sign-in/sign-in';
 import Film from '../../pages/film/film';
-import { loadFilms } from '../../store/api-actions';
+import { loadFilms, verifyToken } from '../../store/api-actions';
+import { getToken } from '../../services/token';
+
+const token = getToken();
 
 export default function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(loadFilms());
+    if (token) {
+      dispatch(verifyToken());
+    }
   }, [dispatch]);
 
   return (
@@ -35,7 +41,7 @@ export default function App() {
             path={AppRoute.MyList}
             element={
               <PrivateRoute>
-                <MyList/>
+                <MyList />
               </PrivateRoute>
             }
           />
