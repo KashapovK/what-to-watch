@@ -1,15 +1,15 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
 import { signOut } from '../../../store/api-actions';
-import { AppRoute } from '../../../const/const.ts';
+import { AppRoute, AuthorizationStatus } from '../../../const/const.ts';
 
 export default function UserBlock() {
-  const { isAuthorized, avatarUrl } = useAppSelector((state) => state.user);
+  const { authorizationStatus, avatarUrl } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   return (
-    isAuthorized ? (
+    authorizationStatus === AuthorizationStatus.Authorized ? (
       <ul className="user-block">
         <li className="user-block__item">
           <div className="user-block__avatar" onClick={() => navigate(AppRoute.MyList)}>

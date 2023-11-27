@@ -21,13 +21,17 @@ export type Film = FilmCard & {
     isFavorite: boolean;
 };
 
-export type FilmReview = {
+export type FilmReview = FilmReviewFormValues & {
     id: string;
     date: string;
     user: string;
+};
+
+export type FilmReviewFormValues = {
     comment: string;
     rating: number;
 };
+
 
 export type AuthData = {
     login: string;
@@ -44,4 +48,10 @@ export type UserData = {
     avatarUrl: string;
     email: string;
     token: string;
+};
+
+export type RequestError = {
+    code?: string;
+    message?: string;
+    name?: string;
 };

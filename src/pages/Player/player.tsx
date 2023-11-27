@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelectedFilm } from '../../hooks/useSelectedFilm';
 import RequestSuspense from '../../components/request-suspense/request-suspense';
-import { VideoPlayer } from '../../components/video-player/video-player';
+import VideoPlayer from '../../components/video-player/video-player';
 import { AppRoute } from '../../const/const';
 import TimeControl from './time-control/time-control';
 
