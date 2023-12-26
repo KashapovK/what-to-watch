@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { FilmCard } from '../../types/types';
-import VideoPlayer from '../video-player/video-player';
+import VideoPlayer from '../video-player';
 
 const Card = ({id, name, previewImage, previewVideoLink}: FilmCard) => {
   const [isHover, setIsHover] = useState(false);

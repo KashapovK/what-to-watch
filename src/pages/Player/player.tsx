@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelectedFilm } from '../../hooks/useSelectedFilm';
 import RequestSuspense from '../../components/request-suspense/request-suspense';
-import VideoPlayer from '../../components/video-player/video-player';
+import VideoPlayer from '../../components/video-player';
 import { AppRoute } from '../../const/const';
 import TimeControl from './time-control/time-control';
 
@@ -23,9 +23,7 @@ export default function Player() {
     playerRef.current?.pause();
     setIsPlaying(false);
   }
-  function handleTimeUpdate() {
-    setTime(Number(playerRef.current?.currentTime));
-  }
+
   function handleFullScreenToggle() {
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -33,6 +31,11 @@ export default function Player() {
       containerRef.current?.requestFullscreen();
     }
   }
+
+  const handleTimeUpdate = useCallback(() => {
+    setTime(Number(playerRef.current?.currentTime));
+  }, []);
+
   return (
     <RequestSuspense>
       <div className="player" ref={containerRef}>
