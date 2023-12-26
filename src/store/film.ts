@@ -1,8 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {Film, FilmCard} from '../types/types';
 import {ALL_GENRES, FILM_LIST_SIZE, SUGGESTION_SIZE} from '../const/film';
-import { loadFavouriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions, setIsFavorite } from './api-actions';
-
+import { loadFavouriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions, setIsFavorite, signOut } from './api-actions';
 
 type FilmSliceState = {
   films: FilmCard[];
@@ -94,9 +93,13 @@ const filmSlice = createSlice({
         favouriteFilms: action.payload,
       }
     ));
+    builder.addCase(signOut.fulfilled, (state) => ({
+      ...state,
+      favouriteFilms: [],
+      selectedFilm: state.selectedFilm ? { ...state.selectedFilm, isFavorite: false } : undefined,
+    }));
   },
 });
-
 
 export const { setSelectedGenre, showMoreFilms } = filmSlice.actions;
 export default filmSlice.reducer;
