@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AsyncActionConfig } from '../types/state.ts';
-import { Film, FilmCard, FilmReview, FilmReviewFormValues, UserCredentials, UserData } from '../types/types.ts';
-import { dropToken, saveToken } from '../services/token.ts';
+import { Film, FilmCard, UserCredentials, UserData } from '../types/types.ts';
+import { dropToken, saveToken } from '../services/storage.ts';
+import { FilmReview, ReviewValues } from '../types/review.ts';
 
 export const loadFilms = createAsyncThunk<FilmCard[], undefined, AsyncActionConfig>(
   'films/loadFilms',
@@ -28,7 +29,7 @@ export const loadSuggestions = createAsyncThunk<FilmCard[], string, AsyncActionC
 );
 
 export const loadReviews = createAsyncThunk<FilmReview[], string, AsyncActionConfig>(
-  'reviews/loadReviews',
+  'review/loadReviews',
   async (filmId: string, {extra: api}) =>
     (await api.get<FilmReview[]>(`/comments/${filmId}`)).data,
 );
@@ -54,13 +55,16 @@ export const signIn = createAsyncThunk<UserData, UserCredentials, AsyncActionCon
   }
 );
 
-export const signOut = createAsyncThunk<UserData, undefined, AsyncActionConfig>(
+export const signOut = createAsyncThunk<void, undefined, AsyncActionConfig>(
   'user/signOut',
-  async (_arg, { extra: api }) => await api.delete('/logout')
+  async (_arg, { extra: api }) => {
+    await api.delete('/logout');
+    dropToken();
+  }
 );
 
-export const loadFavouriteFilms = createAsyncThunk<FilmCard[], undefined, AsyncActionConfig>(
-  'films/loadFavouriteFilms',
+export const loadFavoriteFilms = createAsyncThunk<FilmCard[], undefined, AsyncActionConfig>(
+  'films/loadFavoriteFilms',
   async (_arg, { extra: api }) =>
     (await api.get<FilmCard[]>('/favorite')).data,
 );
@@ -70,9 +74,9 @@ export const clearRequestCount = createAsyncThunk<void, undefined, AsyncActionCo
   () => undefined,
 );
 
-export const addReview = createAsyncThunk<undefined, FilmReviewFormValues & { filmId: string }, AsyncActionConfig>(
-  'reviews/addReview',
-  async ({ filmId, ...requestData }: FilmReviewFormValues & { filmId: string }, { extra: api }) =>
+export const addReview = createAsyncThunk<void, ReviewValues & { filmId: string }, AsyncActionConfig>(
+  'review/addReview',
+  async ({ filmId, ...requestData }: ReviewValues & { filmId: string }, { extra: api }) =>
     await api.post(`/comments/${filmId}`, requestData)
 );
 

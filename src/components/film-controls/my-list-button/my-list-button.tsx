@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const/const.ts';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { setIsFavorite, loadFavouriteFilms } from '../../../store/api-actions.ts';
+import { setIsFavorite, loadFavoriteFilms } from '../../../store/api-actions.ts';
 
 type MyListButtonProps = {
   listLength?: number;
@@ -16,7 +16,7 @@ export default function MyListButton({ listLength }: MyListButtonProps) {
   function handleStatusToggle() {
     dispatch(setIsFavorite({ filmId: selectedFilm?.id ?? '', status: Number(!selectedFilm?.isFavorite) }))
       .unwrap()
-      .then(() => dispatch(loadFavouriteFilms()));
+      .then(() => dispatch(loadFavoriteFilms()));
   }
 
   function handleClick() {

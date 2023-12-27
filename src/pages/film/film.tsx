@@ -1,18 +1,18 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Tab from './tabs/tabs';
-import MoreLikeThis from '../../components/more-like-this/more-like-this';
 import RequestSuspense from '../../components/request-suspense/request-suspense';
 import { useSelectedFilm } from '../../hooks/useSelectedFilm';
-import { useFavouriteFilms } from '../../hooks/useFavouriteFilms';
+import { useFavouriteFilms } from '../../hooks/useFavoriteFilms';
 import FilmControls from '../../components/film-controls/film-controls';
+import MovieList from '../../components/movie-list/movie-list';
 
 export default function Film() {
   const { selectedFilm, suggestion, reviews } = useSelectedFilm({
     shouldLoadReviews: true,
     shouldLoadSuggestions: true
   });
-  const { favouriteFilms } = useFavouriteFilms();
+  const { favoriteFilms } = useFavouriteFilms();
 
   return (
     <RequestSuspense>
@@ -39,7 +39,7 @@ export default function Film() {
                   <FilmControls>
                     <FilmControls.PlayLink id={selectedFilm.id} />
                     <FilmControls.MyListButton />
-                    <FilmControls.MyListButton listLength={favouriteFilms?.length} />
+                    <FilmControls.MyListButton listLength={favoriteFilms?.length} />
                     <FilmControls.AddReviewLink id={selectedFilm.id} />
                   </FilmControls>
                 </div>
@@ -64,7 +64,7 @@ export default function Film() {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
-            <MoreLikeThis prop={suggestion} />
+            <MovieList prop={suggestion} />
           </section>
           <Footer/>
         </div>

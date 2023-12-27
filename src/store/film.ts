@@ -1,9 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {Film, FilmCard} from '../types/types';
-import {ALL_GENRES, FILM_LIST_SIZE, SUGGESTION_SIZE} from '../const/film';
-import { loadFavouriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions, setIsFavorite, signOut } from './api-actions';
-
-type FilmSliceState = {
+import {ALL_GENRES, EPortionSizes} from '../const/film';
+import { loadFavoriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions, setIsFavorite, signOut } from './api-actions';
+interface FilmSliceState {
   films: FilmCard[];
   filteredFilms: FilmCard[];
   genres: string[];
@@ -13,19 +12,19 @@ type FilmSliceState = {
   suggestions: FilmCard[];
   suggestion: FilmCard[];
   selectedFilm?: Film;
-  favouriteFilms: FilmCard[];
-};
+  favoriteFilms: FilmCard[];
+}
 
-const initialState: FilmSliceState = {
+export const initialState: FilmSliceState = {
   films: [],
   filteredFilms: [],
   genres: [ALL_GENRES],
   selectedGenre: ALL_GENRES,
   filmListSize: [],
-  filmListMaxLength: FILM_LIST_SIZE,
+  filmListMaxLength: EPortionSizes.FilmList,
   suggestions: [],
   suggestion: [],
-  favouriteFilms: [],
+  favoriteFilms: [],
 };
 
 function setSelectedFilm(state: FilmSliceState, action: PayloadAction<Film>) {
@@ -46,13 +45,13 @@ const filmSlice = createSlice({
           ...state,
           SelectedGenre: action.payload,
           filteredFilms,
-          filmListSize: filteredFilms.slice(0, FILM_LIST_SIZE),
-          filmListMaxLength: FILM_LIST_SIZE
+          filmListSize: filteredFilms.slice(0, EPortionSizes.FilmList),
+          filmListMaxLength: EPortionSizes.FilmList
         }
       );
     },
     showMoreFilms: (state) => {
-      const length = state.filmListMaxLength + FILM_LIST_SIZE;
+      const length = state.filmListMaxLength + EPortionSizes.FilmList;
 
       return (
         {
@@ -68,11 +67,11 @@ const filmSlice = createSlice({
       {
         ...state,
         selectedGenre: ALL_GENRES,
-        filmListLength: FILM_LIST_SIZE,
+        filmListLength: EPortionSizes.FilmList,
         genres: [ALL_GENRES, ...new Set(action.payload.map(({ genre }) => genre))],
         films: action.payload,
         filteredFilms: action.payload,
-        filmListPortion: action.payload.slice(0, FILM_LIST_SIZE),
+        filmListPortion: action.payload.slice(0, EPortionSizes.FilmList),
       }
     ));
     builder.addCase(loadPromoFilm.fulfilled, setSelectedFilm);
@@ -82,20 +81,20 @@ const filmSlice = createSlice({
       {
         ...state,
         suggestions: action.payload,
-        suggestionPortion: action.payload.slice(0, SUGGESTION_SIZE),
+        suggestionPortion: action.payload.slice(0, EPortionSizes.Suggestions),
       }
     ));
-    builder.addCase(loadFavouriteFilms.fulfilled, (state, action: PayloadAction<FilmCard[]>) => (
+    builder.addCase(loadFavoriteFilms.fulfilled, (state, action: PayloadAction<FilmCard[]>) => (
       {
         ...state,
         suggestions: action.payload,
-        suggestionPortion: action.payload.slice(0, SUGGESTION_SIZE),
+        suggestionPortion: action.payload.slice(0, EPortionSizes.Suggestions),
         favouriteFilms: action.payload,
       }
     ));
     builder.addCase(signOut.fulfilled, (state) => ({
       ...state,
-      favouriteFilms: [],
+      favoriteFilms: [],
       selectedFilm: state.selectedFilm ? { ...state.selectedFilm, isFavorite: false } : undefined,
     }));
   },

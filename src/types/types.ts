@@ -1,37 +1,25 @@
-export type FilmCard = {
+export interface FilmCard {
     id: string;
     name: string;
-    previewImage?: string;
-    previewVideoLink?: string;
+    previewImage: string;
+    previewVideoLink: string;
     genre: string;
-};
+  }
 
-export type Film = FilmCard & {
+export interface Film extends Omit<FilmCard, 'previewImage' | 'previewVideoLink'> {
     posterImage: string;
     backgroundImage: string;
     backgroundColor?: string;
     videoLink: string;
-    description?: string;
+    description: string;
     rating: number;
-    scoresCount?: number;
-    director?: string;
-    starring?: [string];
-    runTime?: number;
+    scoresCount: number;
+    director: string;
+    starring: string[];
+    runTime: number;
     released: number;
     isFavorite: boolean;
-};
-
-export type FilmReview = FilmReviewFormValues & {
-    id: string;
-    date: string;
-    user: string;
-};
-
-export type FilmReviewFormValues = {
-    comment: string;
-    rating: number;
-};
-
+}
 
 export type AuthData = {
     login: string;

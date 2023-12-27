@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { UserData } from '../types/types';
 import { signOut, verifyToken, signIn } from './api-actions';
 import { AuthorizationStatus } from '../const/const';
-import { getToken } from '../services/token';
+import { getToken } from '../services/storage';
 
 type UserSliceState = UserData & {
   authorizationStatus: AuthorizationStatus;
@@ -10,7 +10,7 @@ type UserSliceState = UserData & {
 
 const token = getToken();
 
-const initialState: UserSliceState = {
+export const initialState: UserSliceState = {
   authorizationStatus: token ? AuthorizationStatus.Unknown :
     AuthorizationStatus.Unauthorized,
   name: '',

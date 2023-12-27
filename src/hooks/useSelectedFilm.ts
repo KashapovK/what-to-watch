@@ -15,7 +15,7 @@ const NOT_FOUND_MESSAGE = 'Request failed with status code 404';
 export function useSelectedFilm({ shouldLoadSuggestions = false, shouldLoadReviews = false }: UseSelectedFilmParams) {
   const { id = '' } = useParams();
   const { selectedFilm, suggestion } = useAppSelector((state) => state.film);
-  const { reviews } = useAppSelector((state) => state.reviews);
+  const { reviews } = useAppSelector((state) => state.review);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

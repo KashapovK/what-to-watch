@@ -1,4 +1,0 @@
-export const REVIEW_FIELDS = {
-  COMMENT_MIN_LENGTH: 50,
-  COMMENT_MAX_LENGTH: 400,
-};

@@ -1,8 +1,9 @@
-import { FilmReview } from '../../../../types/types';
-import Reviews from './review.tsx/review';
+import { FilmReview } from '../../../../types/review';
+import ReviewBlock from './review-block.tsx/review-block';
 
-type ReviewTabProps = {
-    reviews: FilmReview [];
+
+interface ReviewTabProps {
+  reviews: FilmReview[];
 }
 
 export default function ReviewTab({ reviews }: ReviewTabProps) {
@@ -10,7 +11,7 @@ export default function ReviewTab({ reviews }: ReviewTabProps) {
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {reviews.map((value) => (
-          <Reviews key={value.id} {...value} />
+          <ReviewBlock key={value.id} {...value} />
         ))}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { getRatingDescription } from '../../../../utils/rating-description';
+import { getRatingDescription } from '../../../../utils/film';
 import { Film } from '../../../../types/types';
 
 export default function OverviewTab ({rating, description, scoresCount, director, starring}:Film) {
