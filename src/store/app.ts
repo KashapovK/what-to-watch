@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { clearRequestCount, loadFavouriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadReviews, loadSuggestions, setIsFavorite, signIn, signOut, verifyToken } from './api-actions.ts';
+import { clearRequestCount, loadFavoriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadReviews, loadSuggestions, setIsFavorite, signIn, signOut, verifyToken } from './api-actions.ts';
 
 interface AppSliceState {
   pendingRequestsCount: number;
 }
 
-const initialState: AppSliceState = {
+export const initialState: AppSliceState = {
   pendingRequestsCount: 0,
 };
 
@@ -43,8 +43,8 @@ const appSlice = createSlice({
     builder.addCase(setIsFavorite.pending, increaseCount);
     builder.addCase(setIsFavorite.fulfilled, decreaseCount);
     builder.addCase(setIsFavorite.rejected, decreaseCount);
-    builder.addCase(loadFavouriteFilms.pending, increaseCount);
-    builder.addCase(loadFavouriteFilms.fulfilled, decreaseCount);
+    builder.addCase(loadFavoriteFilms.pending, increaseCount);
+    builder.addCase(loadFavoriteFilms.fulfilled, decreaseCount);
     builder.addCase(clearRequestCount.fulfilled, (state) => {
       state.pendingRequestsCount = 0;
     });

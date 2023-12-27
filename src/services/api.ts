@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig} from 'axios';
-import { getToken } from './token';
+import { getToken } from './storage';
 import { toast } from 'react-toastify';
 
 const BACKEND_URL = 'https://13.design.pages.academy/wtw';

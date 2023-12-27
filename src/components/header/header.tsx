@@ -1,16 +1,21 @@
+import { PropsWithChildren } from 'react';
+import classNames from 'classnames';
+import Breadcrumbs from './breadcrumbs/breadcrumbs';
+import Logo from './logo/logo';
 import UserBlock from './user-block/user-block';
 
-export default function Header() {
+interface HeaderProps extends PropsWithChildren {
+  className?: string;
+}
+
+export default function Header({ children, className }: HeaderProps) {
   return (
-    <header className="page-header film-card__head">
-      <div className="logo">
-        <a className="logo__link">
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </a>
-      </div>
-      <UserBlock/>
+    <header className={classNames('page-header', className)}>
+      {children}
     </header>
   );
 }
+
+Header.Logo = Logo;
+Header.UserBlock = UserBlock;
+Header.Breadcrumbs = Breadcrumbs;

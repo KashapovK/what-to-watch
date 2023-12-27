@@ -1,6 +1,6 @@
 import { Film } from '../../../../types/types';
 
-export default function DetailsTab({genre, releaseDate, runTime, director, starring}: Film) {
+export default function DetailsTab({genre, released, runTime, director, starring}: Film) {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -12,9 +12,9 @@ export default function DetailsTab({genre, releaseDate, runTime, director, starr
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
             {starring.map((value) => (
-              <div key={value} className="film-card__details-value_field_starring">
+              <span key={value} className="film-card__details-value_field_starring">
                 {value}
-              </div>
+              </span>
             ))}
           </span>
         </p>
@@ -31,7 +31,7 @@ export default function DetailsTab({genre, releaseDate, runTime, director, starr
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{releaseDate}</span>
+          <span className="film-card__details-value">{released}</span>
         </p>
       </div>
     </div>

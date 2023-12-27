@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import { Film, FilmReview } from '../../../types/types';
+import { Film} from '../../../types/types';
 import OverviewTab from './overview-tab/overview-tab';
 import ReviewTab from './review-tab/review-tab';
 import DetailsTab from './details-tab/details-tab';
 import { EFilmPageTabs } from '../../../const/const';
+import { FilmReview } from '../../../types/review';
 
 type FilmTabProps = Film & {
     reviews: FilmReview [];
