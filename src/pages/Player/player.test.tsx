@@ -44,14 +44,14 @@ describe('Component: Player', () => {
   });
 
   it('should redirect to the film page on exit button click', async () => {
-    const { component, history } = withProviders(<Player />, {
+    const { component, mockHistory } = withProviders(<Player />, {
       film: {
         selectedFilm: mockedSelectedFilm,
       }
     });
     render(component);
     await userEvent.click(screen.getByRole('button', { name: /exit/i }));
-    expect(history.location.pathname).toBe(AppRoute.Film.replace(':id', mockedSelectedFilm.id));
+    expect(mockHistory.location.pathname).toBe(AppRoute.Film.replace(':id', mockedSelectedFilm.id));
   });
 
   it('should display play and pause buttons', async () => {

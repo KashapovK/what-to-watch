@@ -1,10 +1,10 @@
 import userSliceReducer, { initialState } from './user.ts';
 import { signIn, signOut, verifyToken } from './api-actions.ts';
-import { mockUserDetails } from '../utils/mock-data.ts';
 import { AuthorizationStatus } from '../const/const.ts';
+import { mockUserDetails } from '../utils/mock-data.ts';
 
 describe('Slice: User', () => {
-  const mockedUserDetails = mockUserDetails();
+  const mockUserData = mockUserDetails();
 
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
@@ -19,14 +19,14 @@ describe('Slice: User', () => {
   });
 
   it('should change auth status with "signIn" action', () => {
-    const expectedState = { ...initialState, ...mockedUserDetails, authorizationStatus: AuthorizationStatus.Authorized };
-    const result = userSliceReducer(initialState, {type: signIn.fulfilled.type, payload: mockedUserDetails});
+    const expectedState = { ...initialState, ...mockUserData, authorizationStatus: AuthorizationStatus.Authorized };
+    const result = userSliceReducer(initialState, {type: signIn.fulfilled.type, payload: mockUserData});
     expect(result).toEqual(expectedState);
   });
 
   it('should change auth status with "verifyToken" action', () => {
-    const expectedState = { ...initialState, ...mockedUserDetails, authorizationStatus: AuthorizationStatus.Authorized };
-    const result = userSliceReducer(initialState, {type: verifyToken.fulfilled.type, payload: mockedUserDetails});
+    const expectedState = { ...initialState, ...mockUserData, authorizationStatus: AuthorizationStatus.Authorized };
+    const result = userSliceReducer(initialState, {type: verifyToken.fulfilled.type, payload: mockUserData});
     expect(result).toEqual(expectedState);
   });
 

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { withProviders } from '../../utils/mock-component.tsx';
 import { expect } from 'vitest';
 import PrivateRoute from './private-route.tsx';
-import { AppRoute, AuthorizationStatus } from '../../const/const.ts';
+import { AuthorizationStatus, AppRoute } from '../../const/const.ts';
 
 describe('Component: PrivateRoute', () => {
   it('should render children when the user is authorized', () => {
@@ -21,7 +21,7 @@ describe('Component: PrivateRoute', () => {
   });
 
   it('should redirect to sign in page when the user is unauthorized', () => {
-    const { component, history } = withProviders(
+    const { component, mockHistory } = withProviders(
       <PrivateRoute>
         <span>Example Child</span>
       </PrivateRoute>,
@@ -32,7 +32,7 @@ describe('Component: PrivateRoute', () => {
       }
     );
     render(component);
-    expect(history.location.pathname).toBe(AppRoute.SignIn);
+    expect(mockHistory.location.pathname).toBe(AppRoute.SignIn);
     expect(screen.queryByText(/example child/i)).not.toBeInTheDocument();
   });
 });

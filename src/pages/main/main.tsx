@@ -8,10 +8,10 @@ import ShowMoreFilms from './show-more-button/show-more-button';
 import { loadPromoFilm } from '../../store/api-actions';
 import RequestSuspense from '../../components/request-suspense/request-suspense';
 import FilmControls from '../../components/film-controls/film-controls';
-import { useFavouriteFilms } from '../../hooks/useFavoriteFilms';
+import { useFavoriteFilms } from '../../hooks/use-favorite-films';
 
 export default function MainPage () {
-  const { favoriteFilms } = useFavouriteFilms();
+  const { favoriteFilms } = useFavoriteFilms();
   const { filmListSize, selectedFilm } = useAppSelector((state) => state.film);
   const dispatch = useAppDispatch();
 

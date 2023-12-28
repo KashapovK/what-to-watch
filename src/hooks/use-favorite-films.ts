@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '.';
 import { AuthorizationStatus } from '../const/const';
 import { loadFavoriteFilms } from '../store/api-actions';
 
-export function useFavouriteFilms() {
+export function useFavoriteFilms() {
   const { favoriteFilms } = useAppSelector((state) => state.film);
   const { authorizationStatus } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();

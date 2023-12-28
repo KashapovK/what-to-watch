@@ -2,17 +2,17 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Tab from './tabs/tabs';
 import RequestSuspense from '../../components/request-suspense/request-suspense';
-import { useSelectedFilm } from '../../hooks/useSelectedFilm';
-import { useFavouriteFilms } from '../../hooks/useFavoriteFilms';
+import { useSelectedFilm } from '../../hooks/use-selected-film';
 import FilmControls from '../../components/film-controls/film-controls';
 import MovieList from '../../components/movie-list/movie-list';
+import { useFavoriteFilms } from '../../hooks/use-favorite-films';
 
 export default function Film() {
   const { selectedFilm, suggestion, reviews } = useSelectedFilm({
     shouldLoadReviews: true,
     shouldLoadSuggestions: true
   });
-  const { favoriteFilms } = useFavouriteFilms();
+  const { favoriteFilms } = useFavoriteFilms();
 
   return (
     <RequestSuspense>
