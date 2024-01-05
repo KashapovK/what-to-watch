@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelectedFilm } from '../../hooks/useSelectedFilm';
+import { useSelectedFilm } from '../../hooks/use-selected-film';
 import RequestSuspense from '../../components/request-suspense/request-suspense';
 import VideoPlayer from '../../components/video-player';
 import { AppRoute } from '../../const/const';

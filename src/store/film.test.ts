@@ -1,14 +1,13 @@
 import filmSliceReducer, { initialState, setSelectedGenre, showMoreFilms } from './film.ts';
 import { mockFilmArray } from '../utils/mock-data.ts';
 import { loadFavoriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions, setIsFavorite, signOut} from './api-actions.ts';
-
 import { ALL_GENRES, EPortionSizes } from '../const/film.ts';
 
 describe('Slice: Film', () => {
-  const mockedFilmArray = mockFilmArray();
-  const mockedFilmDetails = mockedFilmArray[0];
-  const mockedGenre = mockedFilmDetails.genre;
-  const mockedGenres = [ALL_GENRES, ...new Set(mockedFilmArray.map(({ genre }) => genre))];
+  const mockFilmList = mockFilmArray();
+  const mockFilmDetails = mockFilmList[0];
+  const mockGenre = mockFilmDetails.genre;
+  const mockGenres = [ALL_GENRES, ...new Set(mockFilmList.map(({ genre }) => genre))];
 
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
@@ -23,8 +22,8 @@ describe('Slice: Film', () => {
   });
 
   it('should change genre to specific with "setSelectedGenre" action', () => {
-    const expectedState = { ...initialState, selectedGenre: mockedGenre };
-    const result = filmSliceReducer(initialState, setSelectedGenre(mockedGenre));
+    const expectedState = { ...initialState, selectedGenre: mockGenre };
+    const result = filmSliceReducer(initialState, setSelectedGenre(mockGenre));
     expect(result).toEqual(expectedState);
   });
 
@@ -43,67 +42,67 @@ describe('Slice: Film', () => {
   it('should store film list with "loadFilms" action', () => {
     const expectedState = {
       ...initialState,
-      genres: mockedGenres,
-      films: mockedFilmArray,
-      filteredFilms: mockedFilmArray,
-      filmListPortion: mockedFilmArray.slice(0, EPortionSizes.FilmList)
+      genres: mockGenres.slice(0, EPortionSizes.Genres),
+      films: mockFilmList,
+      filteredFilms: mockFilmList,
+      filmListPortion: mockFilmList.slice(0, EPortionSizes.FilmList)
     };
-    const result = filmSliceReducer(initialState, { type: loadFilms.fulfilled.type, payload: mockedFilmArray });
+    const result = filmSliceReducer(initialState, { type: loadFilms.fulfilled.type, payload: mockFilmList });
     expect(result).toEqual(expectedState);
   });
 
   it('should store film details with "loadPromoFilm" action', () => {
     const expectedState = {
       ...initialState,
-      selectedFilm: mockedFilmDetails,
+      selectedFilm: mockFilmDetails,
     };
-    const result = filmSliceReducer(initialState, { type: loadPromoFilm.fulfilled.type, payload: mockedFilmDetails });
+    const result = filmSliceReducer(initialState, { type: loadPromoFilm.fulfilled.type, payload: mockFilmDetails });
     expect(result).toEqual(expectedState);
   });
 
   it('should store film details with "loadFilmDetails" action', () => {
     const expectedState = {
       ...initialState,
-      selectedFilm: mockedFilmDetails,
+      selectedFilm: mockFilmDetails,
     };
-    const result = filmSliceReducer(initialState, { type: loadFilmDetails.fulfilled.type, payload: mockedFilmDetails });
+    const result = filmSliceReducer(initialState, { type: loadFilmDetails.fulfilled.type, payload: mockFilmDetails });
     expect(result).toEqual(expectedState);
   });
 
   it('should store film details with "setIsFavorite" action', () => {
     const expectedState = {
       ...initialState,
-      selectedFilm: mockedFilmDetails,
+      selectedFilm: mockFilmDetails,
     };
-    const result = filmSliceReducer(initialState, { type: setIsFavorite.fulfilled.type, payload: mockedFilmDetails });
+    const result = filmSliceReducer(initialState, { type: setIsFavorite.fulfilled.type, payload: mockFilmDetails });
     expect(result).toEqual(expectedState);
   });
 
   it('should store film details with "setIsFavorite" action', () => {
     const expectedState = {
       ...initialState,
-      selectedFilm: mockedFilmDetails,
+      selectedFilm: mockFilmDetails,
     };
-    const result = filmSliceReducer(initialState, { type: setIsFavorite.fulfilled.type, payload: mockedFilmDetails });
+    const result = filmSliceReducer(initialState, { type: setIsFavorite.fulfilled.type, payload: mockFilmDetails });
     expect(result).toEqual(expectedState);
   });
 
   it('should store film list with "loadSuggestions" action', () => {
     const expectedState = {
       ...initialState,
-      suggestions: mockedFilmArray,
-      suggestionPortion: mockedFilmArray.slice(0, EPortionSizes.Suggestions)
+      suggestions: mockFilmList,
+      suggestionPortion: mockFilmList.slice(0, EPortionSizes.Suggestions)
     };
-    const result = filmSliceReducer(initialState, { type: loadSuggestions.fulfilled.type, payload: mockedFilmArray });
+    const result = filmSliceReducer(initialState, { type: loadSuggestions.fulfilled.type, payload: mockFilmList });
     expect(result).toEqual(expectedState);
   });
 
   it('should store film list with "loadFavoriteFilms" action', () => {
     const expectedState = {
       ...initialState,
-      favoriteFilms: mockedFilmArray,
+      favoriteFilms: mockFilmList,
     };
-    const result = filmSliceReducer(initialState, { type: loadFavoriteFilms.fulfilled.type, payload: mockedFilmArray });
+    const result = filmSliceReducer(initialState, { type: loadFavoriteFilms.fulfilled.type, payload: mockFilmList });
     expect(result).toEqual(expectedState);
   });
 
@@ -119,10 +118,10 @@ describe('Slice: Film', () => {
   it('should update selected film info with "signOut" action', () => {
     const expectedState = {
       ...initialState,
-      selectedFilm: {...mockedFilmDetails, isFavorite: false},
+      selectedFilm: {...mockFilmDetails, isFavorite: false},
       favoriteFilms: [],
     };
-    const result = filmSliceReducer({...initialState, selectedFilm: mockedFilmDetails}, signOut.fulfilled);
+    const result = filmSliceReducer({...initialState, selectedFilm: mockFilmDetails}, signOut.fulfilled);
     expect(result).toEqual(expectedState);
   });
 });

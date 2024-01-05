@@ -6,7 +6,7 @@ import { extractActionsTypes } from '../../../utils/mock-reducer.ts';
 import { signOut } from '../../../store/api-actions.ts';
 import { expect } from 'vitest';
 import { StatusCodes } from 'http-status-codes';
-import { AppRoute, AuthorizationStatus } from '../../../const/const.ts';
+import { AuthorizationStatus, AppRoute } from '../../../const/const.ts';
 import UserBlock from './user-block.tsx';
 
 describe('Component: UserBlock', () => {

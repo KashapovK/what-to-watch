@@ -8,6 +8,6 @@ describe('Component: TimeControls', () => {
 
   it('should render correctly', () => {
     render(<TimeControl time={time} duration={time}/>);
-    expect(screen.getByText(formatPlayerTime(time))).toBeInTheDocument();
+    expect(screen.getByText(formatPlayerTime(time, time))).toBeInTheDocument();
   });
 });

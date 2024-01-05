@@ -1,6 +1,6 @@
 import Breadcrumbs from '../../components/header/breadcrumbs/breadcrumbs';
 import AddReviewForm from './add-review-form/add-review-form';
-import { useSelectedFilm } from '../../hooks/useSelectedFilm';
+import { useSelectedFilm } from '../../hooks/use-selected-film';
 import RequestSuspense from '../../components/request-suspense/request-suspense';
 
 export default function AddReview() {

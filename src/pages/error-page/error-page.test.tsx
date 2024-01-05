@@ -9,11 +9,11 @@ import { AppRoute } from '../../const/const.ts';
 
 describe('Component: SignInForm', () => {
   it('should render correctly and display redirect link', async () => {
-    const {component, history, mockStore} = withProviders(<ErrorPage />);
+    const {component, mockHistory, mockStore} = withProviders(<ErrorPage />);
     render(component);
     expect(screen.getByText(/ошибка 404\. страница не найдена/i)).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', {name: /вернуться на главную страницу/i}));
-    expect(history.location.pathname).toBe(AppRoute.Main);
+    expect(mockHistory.location.pathname).toBe(AppRoute.Main);
     const actions = extractActionsTypes(mockStore.getActions());
     expect(actions).toEqual([
       clearRequestCount.pending.type,
