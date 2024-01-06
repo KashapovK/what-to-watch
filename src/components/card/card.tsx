@@ -5,7 +5,7 @@ import { AppRoute } from '../../const/const.ts';
 import { FilmCard } from '../../types/types.ts';
 import { FILM_PREVIEW_DELAY } from '../../const/film.ts';
 
-export default function FilmCard({ id, name, previewImage, previewVideoLink }: FilmCard) {
+export default function Card({ id, name, previewImage, previewVideoLink }: FilmCard) {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
@@ -31,7 +31,6 @@ export default function FilmCard({ id, name, previewImage, previewVideoLink }: F
       clearTimeout(timeoutRef.current);
     }
   }, []);
-
 
   return (
     <article

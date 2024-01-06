@@ -8,13 +8,13 @@ import { showMoreFilms } from '../../../store/film.ts';
 import ShowMoreButton from './show-more-button.tsx';
 
 describe('Component: ShowMoreButton', () => {
-  const mockedFilteredFilms = mockFilmArray();
+  const mockFilteredFilms = mockFilmArray();
 
   it('should show more films on button click', async () => {
     const { component, mockStore } = withProviders(<ShowMoreButton />, {
       film: {
-        filteredFilms: mockedFilteredFilms,
-        filmListMaxLength: mockedFilteredFilms.length - 1,
+        filteredFilms: mockFilteredFilms,
+        filmListMaxLength: mockFilteredFilms.length - 1,
       }
     });
     render(component);
@@ -28,8 +28,8 @@ describe('Component: ShowMoreButton', () => {
   it('should hide the button when all films are displayed', () => {
     const { component } = withProviders(<ShowMoreButton />, {
       film: {
-        filteredFilms: mockedFilteredFilms,
-        filmListMaxLength: mockedFilteredFilms.length,
+        filteredFilms: mockFilteredFilms,
+        filmListMaxLength: mockFilteredFilms.length,
       }
     });
     render(component);

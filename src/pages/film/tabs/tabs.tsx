@@ -11,8 +11,8 @@ type FilmTabProps = Film & {
     reviews: FilmReview [];
 }
 
-export default function Tab ({reviews, ...film}:FilmTabProps) {
-  const [activeTab, setActiveTab] = useState<EFilmPageTabs>(EFilmPageTabs.Overview);
+export default function FilmTabs({ reviews, ...filmData }: FilmTabProps) {
+  const [selectedTab, setSelectedTab] = useState<EFilmPageTabs>(EFilmPageTabs.Overview);
 
   return (
     <div className="film-card__desc">
@@ -21,17 +21,17 @@ export default function Tab ({reviews, ...film}:FilmTabProps) {
           {Object.values(EFilmPageTabs).map((tab) => (
             <li
               key={tab}
-              className={classNames ('film-nav__item', tab === activeTab && 'film-nav__item film-nav__item--active')}
-              onClick={() => setActiveTab(tab)}
+              className={classNames('film-nav__item', tab === selectedTab && 'film-nav__item--active')}
+              onClick={() => setSelectedTab(tab)}
             >
               <span className="film-nav__link">{tab}</span>
             </li>
           ))}
         </ul>
       </nav>
-      {activeTab === EFilmPageTabs.Overview && <OverviewTab {...film} />}
-      {activeTab === EFilmPageTabs.Details && <DetailsTab {...film} />}
-      {activeTab === EFilmPageTabs.Reviews && <ReviewTab reviews={reviews} />}
+      {selectedTab === EFilmPageTabs.Overview && <OverviewTab {...filmData} />}
+      {selectedTab === EFilmPageTabs.Details && <DetailsTab {...filmData} />}
+      {selectedTab === EFilmPageTabs.Reviews && <ReviewTab reviews={reviews} />}
     </div>
   );
 }

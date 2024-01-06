@@ -18,7 +18,7 @@ export default function AddReviewForm() {
     handleSubmit,
     control,
     formState: { isValid }
-  } = useForm <ReviewFormValues>({
+  } = useForm<ReviewFormValues>({
     defaultValues: INITIAL_FORM_STATE,
     mode: 'all',
   });

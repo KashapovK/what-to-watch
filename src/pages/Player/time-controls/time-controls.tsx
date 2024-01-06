@@ -5,7 +5,7 @@ export interface TimeControlsProps {
   duration: number;
 }
 
-export default function TimeControl({ time, duration }: TimeControlsProps) {
+export default function TimeControls({ time, duration }: TimeControlsProps) {
   return (
     <div className="player__controls-row">
       <div className="player__time">

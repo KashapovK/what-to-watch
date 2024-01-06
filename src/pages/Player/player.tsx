@@ -4,7 +4,7 @@ import { useSelectedFilm } from '../../hooks/use-selected-film';
 import RequestSuspense from '../../components/request-suspense/request-suspense';
 import VideoPlayer from '../../components/video-player';
 import { AppRoute } from '../../const/const';
-import TimeControl from './time-control/time-control';
+import TimeControls from './time-controls/time-controls';
 
 interface CrossBrowserDocument {
   exitFullscreen?: () => void;
@@ -17,9 +17,15 @@ interface CrossBrowserDocument {
   msFullscreenElement?: Element | null;
 }
 
+interface CrossBrowserElement extends HTMLDivElement {
+  webkitRequestFullscreen?: () => Promise<void>;
+  msRequestFullscreen?: () => Promise<void>;
+  mozRequestFullscreen?: () => Promise<void>;
+}
+
 export default function Player() {
   const playerRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<CrossBrowserElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
   const navigate = useNavigate();
@@ -29,9 +35,17 @@ export default function Player() {
     playerRef.current?.play();
     setIsPlaying(true);
   }
+
   function handlePause() {
     playerRef.current?.pause();
     setIsPlaying(false);
+  }
+
+  function enterFullScreen(): void {
+    containerRef.current?.requestFullscreen?.();
+    containerRef.current?.mozRequestFullscreen?.();
+    containerRef.current?.webkitRequestFullscreen?.();
+    containerRef.current?.msRequestFullscreen?.();
   }
 
   function exitFullScreen(): void {
@@ -59,7 +73,7 @@ export default function Player() {
     if (isFullscreen()) {
       exitFullScreen();
     } else {
-      containerRef.current?.requestFullscreen?.();
+      enterFullScreen();
     }
   }
 
@@ -78,18 +92,15 @@ export default function Player() {
               ref={playerRef}
               onTimeUpdate={handleTimeUpdate}
             />
-
             <button
               type="button"
               className="player__exit"
-              onClick={() =>
-                navigate(AppRoute.Film.replace(':id', selectedFilm.id))}
+              onClick={() => navigate(AppRoute.Film.replace(':id', selectedFilm.id))}
             >
-               Exit
+              Exit
             </button>
-
             <div className="player__controls">
-              {playerRef.current && <TimeControl time={time} duration={Number(playerRef.current?.duration)} />}
+              {playerRef.current && <TimeControls time={time} duration={Number(playerRef.current?.duration)} />}
               <div className="player__controls-row">
                 {isPlaying ? (
                   <button type="button" className="player__play" onClick={handlePause}>

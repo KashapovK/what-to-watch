@@ -3,7 +3,7 @@ import { withProviders } from '../../../utils/mock-component.tsx';
 import * as faker from 'faker';
 import userEvent from '@testing-library/user-event';
 import { AppRoute, AuthorizationStatus } from '../../../const/const.ts';
-import AddReviewLink from '../add-review-link/add-review-link.tsx';
+import AddReviewLink from './index.tsx';
 
 describe('Component: PlayLink', () => {
   const mockFilmId = faker.datatype.uuid();

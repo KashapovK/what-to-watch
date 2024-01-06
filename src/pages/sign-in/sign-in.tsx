@@ -19,11 +19,15 @@ export default function SignIn() {
 
   return (
     <div className="user-page">
-      <Header/>
+      <Header className="user-page__head">
+        <Header.Logo />
+        <h1 className="page-title user-page__title">Sign in</h1>
+      </Header>
+
       <div className="sign-in user-page__content">
-        <SignInForm/>
+        <SignInForm />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

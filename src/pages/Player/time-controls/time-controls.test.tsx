@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import * as faker from 'faker';
 import { formatPlayerTime } from '../../../utils/format.ts';
-import TimeControl from './time-control.tsx';
+import TimeControl from './time-controls.tsx';
 
 describe('Component: TimeControls', () => {
   const time = faker.time.recent();
