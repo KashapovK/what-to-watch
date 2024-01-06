@@ -2,10 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const/const';
 import { useAppDispatch } from '../../hooks';
 import { clearRequestCount } from '../../store/api-actions';
-import './error-page.css';
 
 export default function ErrorPage() {
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -15,8 +13,9 @@ export default function ErrorPage() {
   }
 
   return (
-    <><h1>404 Not Found</h1>
-      <button className="redirect-button" onClick={handleRedirect} >Вернуться на главную страницу</button>
-    </>
+    <div className="not-found-description">
+      <span>Ошибка 404. Страница не найдена</span>
+      <button className="redirect-button" onClick={handleRedirect}>Вернуться на главную страницу</button>
+    </div>
   );
 }

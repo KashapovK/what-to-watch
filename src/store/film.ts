@@ -37,13 +37,14 @@ const filmSlice = createSlice({
   reducers: {
     setSelectedGenre: (state, action: PayloadAction<string>) => {
       const filteredFilms =
-      action.payload === ALL_GENRES
-        ? state.films
-        : state.films.filter((film) => film.genre === action.payload);
+        action.payload === ALL_GENRES
+          ? state.films
+          : state.films.filter((film) => film.genre === action.payload);
+
       return (
         {
           ...state,
-          SelectedGenre: action.payload,
+          selectedGenre: action.payload,
           filteredFilms,
           filmListSize: filteredFilms.slice(0, EPortionSizes.FilmList),
           filmListMaxLength: EPortionSizes.FilmList
@@ -67,8 +68,8 @@ const filmSlice = createSlice({
       {
         ...state,
         selectedGenre: ALL_GENRES,
-        filmListLength: EPortionSizes.FilmList,
-        genres: [ALL_GENRES, ...new Set(action.payload.map(({ genre }) => genre))],
+        filmListMaxLength: EPortionSizes.FilmList,
+        genres: [ALL_GENRES, ...new Set(action.payload.map(({ genre }) => genre))].slice(0, EPortionSizes.Genres),
         films: action.payload,
         filteredFilms: action.payload,
         filmListPortion: action.payload.slice(0, EPortionSizes.FilmList),
@@ -87,9 +88,7 @@ const filmSlice = createSlice({
     builder.addCase(loadFavoriteFilms.fulfilled, (state, action: PayloadAction<FilmCard[]>) => (
       {
         ...state,
-        suggestions: action.payload,
-        suggestionPortion: action.payload.slice(0, EPortionSizes.Suggestions),
-        favouriteFilms: action.payload,
+        favoriteFilms: action.payload,
       }
     ));
     builder.addCase(signOut.fulfilled, (state) => ({

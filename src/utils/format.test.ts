@@ -10,9 +10,9 @@ describe('Utils: Formats', () => {
   });
 
   it('should format dates', () => {
-    const mockDate = 'Sat Nov 16 1996';
-    expect(formatDate(mockDate, DateFormats.Standard)).toEqual('November 16, 1996');
-    expect(formatDate(mockDate, DateFormats.Short)).toEqual('1996-11-16');
+    const mockDate = 'Sun October 11 1994';
+    expect(formatDate(mockDate, DateFormats.Standard)).toEqual('October 11, 1994');
+    expect(formatDate(mockDate, DateFormats.Short)).toEqual('1994-10-11');
   });
 
   it('should format run time', () => {

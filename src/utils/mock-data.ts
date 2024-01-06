@@ -1,7 +1,11 @@
 import * as faker from 'faker';
 import { VideoPlayerProps } from '../components/video-player/video-player.tsx';
 import { Film, FilmCard, UserCredentials, UserData } from '../types/types.ts';
-import { FilmReview } from '../types/review.ts';
+import { FilmReview, ReviewFormLimitations } from '../types/review.ts';
+
+function getRandomArrayLength(): number {
+  return faker.datatype.number({ min: 5, max: 20 });
+}
 
 export function mockFilmDetails(): Film & FilmCard {
   return ({
@@ -13,10 +17,10 @@ export function mockFilmDetails(): Film & FilmCard {
     backgroundColor: faker.internet.color(),
     videoLink: faker.internet.url(),
     description: faker.commerce.productDescription(),
-    rating: faker.datatype.number({ max: 10 }),
+    rating: faker.datatype.number({ max: ReviewFormLimitations.MaxRating }),
     scoresCount: faker.datatype.number(),
     director: faker.name.findName(),
-    starring: Array.from({ length: 10 }, () => faker.name.findName()),
+    starring: Array.from({ length: getRandomArrayLength() }, () => faker.name.findName()),
     runTime: faker.datatype.number(),
     released: faker.datatype.number(),
     isFavorite: faker.datatype.boolean(),
@@ -26,8 +30,7 @@ export function mockFilmDetails(): Film & FilmCard {
 }
 
 export function mockFilmArray(): (Film & FilmCard)[] {
-  const arrayLength = faker.datatype.number({ min: 5, max: 20 });
-  return Array.from({ length: arrayLength }, () => mockFilmDetails());
+  return Array.from({ length: getRandomArrayLength() }, () => mockFilmDetails());
 }
 
 export function mockUserDetails(): UserData {
@@ -42,7 +45,7 @@ export function mockUserDetails(): UserData {
 export function mockUserCredentials(): UserCredentials {
   return ({
     email: faker.internet.email(),
-    password: faker.internet.password(),
+    password: `${faker.internet.password()}1A`,
   });
 }
 
@@ -58,14 +61,16 @@ export function mockReview(): FilmReview {
     id: faker.datatype.uuid(),
     date: faker.datatype.datetime().toDateString(),
     user: faker.name.findName(),
-    comment: faker.commerce.productDescription(),
-    rating: faker.datatype.number({ max: 10 }),
+    comment: faker.commerce.productDescription()
+      .repeat(ReviewFormLimitations.CommentMinLength)
+      .slice(0, ReviewFormLimitations.CommentMinLength + 2)
+      .trim(),
+    rating: faker.datatype.number({ max: ReviewFormLimitations.MaxRating }),
   });
 }
 
 export function mockReviewArray(): FilmReview[] {
-  const arrayLength = faker.datatype.number({ min: 5, max: 20 });
-  return Array.from({ length: arrayLength }, () => mockReview());
+  return Array.from({ length: getRandomArrayLength() }, () => mockReview());
 }
 
 export function mockToken(): string {

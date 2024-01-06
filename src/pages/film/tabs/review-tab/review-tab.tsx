@@ -1,7 +1,6 @@
 import { FilmReview } from '../../../../types/review';
 import ReviewBlock from './review-block.tsx/review-block';
 
-
 interface ReviewTabProps {
   reviews: FilmReview[];
 }

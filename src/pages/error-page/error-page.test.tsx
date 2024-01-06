@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import ErrorPage from './error-page.tsx';
 import { withProviders } from '../../utils/mock-component.tsx';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 import { clearRequestCount } from '../../store/api-actions.ts';
 import { extractActionsTypes } from '../../utils/mock-reducer.ts';
+import ErrorPage from './error-page.tsx';
 import { AppRoute } from '../../const/const.ts';
 
 describe('Component: SignInForm', () => {

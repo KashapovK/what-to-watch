@@ -3,12 +3,12 @@ import { AppRoute, AuthorizationStatus } from '../../const/const';
 import {ReactElement} from 'react';
 import { useAppSelector } from '../../hooks';
 
-type PrivateRouteProps = {
+interface PrivateRouteProps {
   children: ReactElement;
 }
 
-export default function PrivateRoute(children: PrivateRouteProps) {
-  const {authorizationStatus } = useAppSelector((state) => state.user);
+export default function PrivateRoute({ children }: PrivateRouteProps) {
+  const { authorizationStatus } = useAppSelector((state) => state.user);
 
   return (
     <>

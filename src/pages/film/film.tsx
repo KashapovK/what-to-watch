@@ -18,16 +18,19 @@ export default function Film() {
     <RequestSuspense>
       <>
         {selectedFilm && (
-          <section className="film-card film-card--full"
-            style={{backgroundColor: selectedFilm.backgroundColor}}
-          >
+          <section className="film-card film-card--full" style={{ backgroundColor: selectedFilm.backgroundColor }}>
             <div className="film-card__hero">
               <div className="film-card__bg">
                 <img src={selectedFilm.backgroundImage} alt={selectedFilm.name} />
               </div>
 
               <h1 className="visually-hidden">WTW</h1>
-              <Header/>
+
+              <Header className="film-card__head">
+                <Header.Logo />
+                <Header.UserBlock />
+              </Header>
+
               <div className="film-card__wrap">
                 <div className="film-card__desc">
                   <h2 className="film-card__title">{selectedFilm.name}</h2>
@@ -38,13 +41,13 @@ export default function Film() {
 
                   <FilmControls>
                     <FilmControls.PlayLink id={selectedFilm.id} />
-                    <FilmControls.MyListButton />
                     <FilmControls.MyListButton listLength={favoriteFilms?.length} />
                     <FilmControls.AddReviewLink id={selectedFilm.id} />
                   </FilmControls>
                 </div>
               </div>
             </div>
+
             <div className="film-card__wrap film-card__translate-top">
               <div className="film-card__info">
                 <div className="film-card__poster film-card__poster--big">
@@ -66,7 +69,7 @@ export default function Film() {
             <h2 className="catalog__title">More like this</h2>
             <MovieList prop={suggestion} />
           </section>
-          <Footer/>
+          <Footer />
         </div>
       </>
     </RequestSuspense>
