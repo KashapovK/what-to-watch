@@ -1,11 +1,11 @@
 import { forwardRef, memo } from 'react';
 
-export type VideoPlayerProps = {
-    video: string;
-    posterImage: string;
-    onTimeUpdate?: () => void;
-    muted?: boolean;
-    autoPlay?: boolean;
+export interface VideoPlayerProps {
+  video: string;
+  posterImage: string;
+  onTimeUpdate?: () => void;
+  muted?: boolean;
+  autoPlay?: boolean;
 }
 
 const Player = forwardRef<HTMLVideoElement, VideoPlayerProps>((

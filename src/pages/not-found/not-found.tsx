@@ -3,7 +3,7 @@ import { AppRoute } from '../../const/const';
 import { useAppDispatch } from '../../hooks';
 import { clearRequestCount } from '../../store/api-actions';
 
-export default function ErrorPage() {
+export default function NotFoundPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

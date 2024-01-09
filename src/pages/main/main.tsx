@@ -16,7 +16,7 @@ export default function MainPage () {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch (loadPromoFilm());
+    dispatch(loadPromoFilm());
   }, [dispatch]);
 
   return (
@@ -30,12 +30,20 @@ export default function MainPage () {
 
             <h1 className="visually-hidden">WTW</h1>
 
-            <Header/>
+            <Header className="film-card__head">
+              <Header.Logo />
+              <Header.UserBlock />
+            </Header>
 
             <div className="film-card__wrap">
               <div className="film-card__info">
                 <div className="film-card__poster">
-                  <img src={selectedFilm.posterImage} alt={`${selectedFilm.name} poster`} width="218" height="327" />
+                  <img
+                    src={selectedFilm.posterImage}
+                    alt={`${selectedFilm.name} poster`}
+                    width="218"
+                    height="327"
+                  />
                 </div>
 
                 <div className="film-card__desc">
@@ -58,11 +66,14 @@ export default function MainPage () {
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
-            <GenreList/>
-            <MovieList prop={filmListSize}/>
+
+            <GenreList />
+
+            <MovieList prop={filmListSize} />
+
             <ShowMoreFilms />
           </section>
-          <Footer/>
+          <Footer />
         </div>
       </>
     </RequestSuspense>

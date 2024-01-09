@@ -1,7 +1,6 @@
 import { MockStore, configureMockStore } from '@jedmao/redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 import { State } from '../types/state';
-import { createAPI } from '../services/api';
 import thunk from 'redux-thunk';
 import { Action } from 'redux';
 import { Provider } from 'react-redux';
@@ -14,6 +13,7 @@ import { initialState as appSliceState } from '../store/app.ts';
 import { initialState as userSliceState } from '../store/user.ts';
 import { AxiosInstance } from 'axios';
 import HistoryRouter from '../components/history-router/history-router.tsx';
+import { initAPI } from '../services/api.ts';
 
 interface ComponentWithMockStore {
   component: ReactElement;
@@ -26,7 +26,7 @@ interface HookWrapperWithMockStore extends Omit<ComponentWithMockStore, 'compone
   wrapper: ({ children }: PropsWithChildren) => ReactElement;
 }
 
-export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof initAPI>, Action>;
 
 export function getMockStore (initialState: DeepPartial<State> = {}, axios: AxiosInstance) {
   const middleware = [thunk.withExtraArgument(axios)];
@@ -45,7 +45,7 @@ export function withProviders(
   initialState: DeepPartial<State> = {},
 ): ComponentWithMockStore {
   const memoryHistory = createMemoryHistory();
-  const axios = createAPI();
+  const axios = initAPI();
   const mockAxiosAdapter = new MockAdapter(axios);
   const mockStore = getMockStore(initialState, axios);
 
@@ -65,7 +65,7 @@ export function withProviders(
 
 export function getHookWrapper(initialState: DeepPartial<State> = {}): HookWrapperWithMockStore {
   const memoryHistory = createMemoryHistory();
-  const axios = createAPI();
+  const axios = initAPI();
   const mockAxiosAdapter = new MockAdapter(axios);
   const mockStore = getMockStore(initialState, axios);
 

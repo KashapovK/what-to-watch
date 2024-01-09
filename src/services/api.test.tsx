@@ -1,13 +1,13 @@
 import * as tokenStorage from './storage.ts';
 import { mockToken } from '../utils/mock-data.ts';
 import { afterEach, expect, SpyInstance } from 'vitest';
-import { createAPI } from './api.ts';
 import { getMockStore } from '../utils/mock-component.tsx';
 import { verifyToken } from '../store/api-actions.ts';
 import MockAdapter from 'axios-mock-adapter';
 import { toast } from 'react-toastify';
 import { StatusCodes } from 'http-status-codes';
 import * as faker from 'faker';
+import { initAPI } from './api.ts';
 
 describe('Service: Api', () => {
   const mockAuthToken = mockToken();
@@ -22,7 +22,7 @@ describe('Service: Api', () => {
     getTokenStub = vi
       .spyOn(tokenStorage, 'getToken')
       .mockImplementation(() => mockAuthToken);
-    const axios = createAPI();
+    const axios = initAPI();
     const mockAxiosAdapter = new MockAdapter(axios);
     const mockStore = getMockStore({}, axios);
     await mockStore.dispatch(verifyToken());
@@ -35,7 +35,7 @@ describe('Service: Api', () => {
     getTokenStub = vi
       .spyOn(tokenStorage, 'getToken')
       .mockImplementation(() => '');
-    const axios = createAPI();
+    const axios = initAPI();
     const mockAxiosAdapter = new MockAdapter(axios);
     const mockStore = getMockStore({}, axios);
     await mockStore.dispatch(verifyToken());
@@ -48,7 +48,7 @@ describe('Service: Api', () => {
     const warnStub = vi
       .spyOn(toast, 'warn')
       .mockImplementation(() => '');
-    const axios = createAPI();
+    const axios = initAPI();
     const mockAxiosAdapter = new MockAdapter(axios);
     const mockStore = getMockStore({}, axios);
     mockAxiosAdapter.onGet(/\/login/).reply(StatusCodes.NOT_FOUND, {message: errorMessage});

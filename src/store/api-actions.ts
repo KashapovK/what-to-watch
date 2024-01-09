@@ -6,31 +6,31 @@ import { FilmReview, ReviewValues } from '../types/review.ts';
 
 export const loadFilms = createAsyncThunk<FilmCard[], undefined, AsyncActionConfig>(
   'films/loadFilms',
-  async (_arg, {extra: api}) =>
+  async (_arg, { extra: api }) =>
     (await api.get<FilmCard[]>('/films')).data,
 );
 
 export const loadPromoFilm = createAsyncThunk<Film, undefined, AsyncActionConfig>(
   'films/loadPromoFilm',
-  async (_arg, {extra: api}) =>
+  async (_arg, { extra: api }) =>
     (await api.get<Film>('/promo')).data,
 );
 
 export const loadFilmDetails = createAsyncThunk<Film, string, AsyncActionConfig>(
   'films/loadFilmDetails',
-  async (id: string, {extra: api}) =>
+  async (id: string, { extra: api }) =>
     (await api.get<Film>(`/films/${id}`)).data,
 );
 
 export const loadSuggestions = createAsyncThunk<FilmCard[], string, AsyncActionConfig>(
   'films/loadSuggestions',
-  async (id: string, {extra: api}) =>
+  async (id: string, { extra: api }) =>
     (await api.get<FilmCard[]>(`/films/${id}/similar`)).data,
 );
 
 export const loadReviews = createAsyncThunk<FilmReview[], string, AsyncActionConfig>(
   'review/loadReviews',
-  async (filmId: string, {extra: api}) =>
+  async (filmId: string, { extra: api }) =>
     (await api.get<FilmReview[]>(`/comments/${filmId}`)).data,
 );
 

@@ -52,13 +52,13 @@ const filmSlice = createSlice({
       );
     },
     showMoreFilms: (state) => {
-      const length = state.filmListMaxLength + EPortionSizes.FilmList;
+      const newLength = state.filmListMaxLength + EPortionSizes.FilmList;
 
       return (
         {
           ...state,
-          filmListMaxLength: length,
-          filmListSize: state.filteredFilms.slice(0, length)
+          filmListMaxLength: newLength,
+          filmListSize: state.filteredFilms.slice(0, newLength)
         }
       );
     }

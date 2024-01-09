@@ -16,7 +16,6 @@ export default function SignIn() {
     }
   }, [authorizationStatus, navigate]);
 
-
   return (
     <div className="user-page">
       <Header className="user-page__head">

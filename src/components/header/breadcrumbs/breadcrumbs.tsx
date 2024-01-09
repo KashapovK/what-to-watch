@@ -1,19 +1,18 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const/const';
 
-type BreadcrumbsProps = {
+interface BreadcrumbsProps {
   id: string;
   name: string;
 }
 
-export default function Breadcrumbs({id, name}:BreadcrumbsProps):JSX.Element {
+export default function Breadcrumbs({id, name}: BreadcrumbsProps) {
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
         <li className="breadcrumbs__item">
-          <Link to={AppRoute.Film.replace(':id', id)}
-            className="breadcrumbs__link"
-          >{name}
+          <Link to={AppRoute.Film.replace(':id', id)} className="breadcrumbs__link">
+            {name}
           </Link>
         </li>
         <li className="breadcrumbs__item">
