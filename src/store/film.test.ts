@@ -45,7 +45,7 @@ describe('Slice: Film', () => {
       genres: mockGenres.slice(0, EPortionSizes.Genres),
       films: mockFilmList,
       filteredFilms: mockFilmList,
-      filmListPortion: mockFilmList.slice(0, EPortionSizes.FilmList)
+      filmListSize: mockFilmList.slice(0, EPortionSizes.FilmList)
     };
     const result = filmSliceReducer(initialState, { type: loadFilms.fulfilled.type, payload: mockFilmList });
     expect(result).toEqual(expectedState);
@@ -91,7 +91,7 @@ describe('Slice: Film', () => {
     const expectedState = {
       ...initialState,
       suggestions: mockFilmList,
-      suggestionPortion: mockFilmList.slice(0, EPortionSizes.Suggestions)
+      suggestion: mockFilmList.slice(0, EPortionSizes.Suggestions)
     };
     const result = filmSliceReducer(initialState, { type: loadSuggestions.fulfilled.type, payload: mockFilmList });
     expect(result).toEqual(expectedState);
