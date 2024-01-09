@@ -58,7 +58,7 @@ export default function Film() {
                     height="327"
                   />
                 </div>
-                <Tab reviews={reviews} {...selectedFilm}/>
+                <Tab reviews={reviews} {...selectedFilm} />
               </div>
             </div>
           </section>
@@ -67,6 +67,7 @@ export default function Film() {
         <div className="page-content">
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
+
             <MovieList prop={suggestion} />
           </section>
           <Footer />

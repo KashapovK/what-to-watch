@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { setSelectedGenre } from '../../../store/film';
 
 export default function GenreList() {
-  const {genres, selectedGenre } = useAppSelector((state) => state.film);
+  const { genres, selectedGenre } = useAppSelector((state) => state.film);
   const dispatch = useAppDispatch();
 
   function handleGenreChange(value: string) {
@@ -12,12 +12,12 @@ export default function GenreList() {
     }
   }
 
-  return(
+  return (
     <ul className="catalog__genres-list">
       {genres.map((genre) => (
         <li
           key={genre}
-          className={classNames('catalog__genres-item', genre === selectedGenre && 'catalog__genres-item catalog__genres-item--active')}
+          className={classNames('catalog__genres-item', genre === selectedGenre && 'catalog__genres-item--active')}
           onClick={() => handleGenreChange(genre)}
         >
           <span className="catalog__genres-link">{genre}</span>

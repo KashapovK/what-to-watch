@@ -32,6 +32,7 @@ export default function Card({ id, name, previewImage, previewVideoLink }: FilmC
     }
   }, []);
 
+
   return (
     <article
       className="small-film-card catalog__films-card"

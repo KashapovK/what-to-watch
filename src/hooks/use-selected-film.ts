@@ -3,14 +3,12 @@ import { useAppDispatch, useAppSelector } from './index.ts';
 import { useEffect } from 'react';
 import { loadFilmDetails, loadSuggestions, loadReviews } from '../store/api-actions.ts';
 import { RequestError } from '../types/types.ts';
+import { NOT_FOUND_MESSAGE, NOT_FOUND_URL } from '../const/film.ts';
 
-type UseSelectedFilmParams = {
+interface UseSelectedFilmParams {
   shouldLoadSuggestions?: boolean;
   shouldLoadReviews?: boolean;
 }
-
-const NOT_FOUND_URL = '/content-not-found';
-const NOT_FOUND_MESSAGE = 'Request failed with status code 404';
 
 export function useSelectedFilm({ shouldLoadSuggestions = false, shouldLoadReviews = false }: UseSelectedFilmParams) {
   const { id = '' } = useParams();

@@ -1,12 +1,11 @@
 import { FilmCard } from '../../types/types';
 import Card from '../card/card';
 
-type MovieListProps = {
-    prop: FilmCard [];
+interface MovieListProps {
+  prop: FilmCard[];
 }
 
-export default function MovieList({prop}:MovieListProps) {
-
+export default function MovieList({ prop }: MovieListProps) {
   return (
     <div className="catalog__films-list">
       {prop.map((value) => (

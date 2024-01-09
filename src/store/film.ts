@@ -52,13 +52,13 @@ const filmSlice = createSlice({
       );
     },
     showMoreFilms: (state) => {
-      const length = state.filmListMaxLength + EPortionSizes.FilmList;
+      const newLength = state.filmListMaxLength + EPortionSizes.FilmList;
 
       return (
         {
           ...state,
-          filmListMaxLength: length,
-          filmListSize: state.filteredFilms.slice(0, length)
+          filmListMaxLength: newLength,
+          filmListSize: state.filteredFilms.slice(0, newLength)
         }
       );
     }
@@ -72,7 +72,7 @@ const filmSlice = createSlice({
         genres: [ALL_GENRES, ...new Set(action.payload.map(({ genre }) => genre))].slice(0, EPortionSizes.Genres),
         films: action.payload,
         filteredFilms: action.payload,
-        filmListPortion: action.payload.slice(0, EPortionSizes.FilmList),
+        filmListSize: action.payload.slice(0, EPortionSizes.FilmList),
       }
     ));
     builder.addCase(loadPromoFilm.fulfilled, setSelectedFilm);
@@ -82,7 +82,7 @@ const filmSlice = createSlice({
       {
         ...state,
         suggestions: action.payload,
-        suggestionPortion: action.payload.slice(0, EPortionSizes.Suggestions),
+        suggestion: action.payload.slice(0, EPortionSizes.Suggestions),
       }
     ));
     builder.addCase(loadFavoriteFilms.fulfilled, (state, action: PayloadAction<FilmCard[]>) => (

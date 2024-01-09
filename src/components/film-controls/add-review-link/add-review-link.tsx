@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../../const/const';
 import { useAppSelector } from '../../../hooks';
 
-type AddReviewLinkProps = {
-    id: string;
-  }
+interface AddReviewLinkProps {
+  id: string;
+}
 
 export default function AddReviewLink({ id }: AddReviewLinkProps) {
   const { authorizationStatus } = useAppSelector((state) => state.user);
@@ -14,7 +14,7 @@ export default function AddReviewLink({ id }: AddReviewLinkProps) {
       to={AppRoute.AddReview.replace(':id', id)}
       className="btn film-card__button"
     >
-        Add review
+      Add review
     </Link>
   ) : null;
 }

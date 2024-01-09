@@ -4,15 +4,14 @@ import { signOut, verifyToken, signIn } from './api-actions';
 import { AuthorizationStatus } from '../const/const';
 import { getToken } from '../services/storage';
 
-type UserSliceState = UserData & {
+interface UserSliceState extends UserData {
   authorizationStatus: AuthorizationStatus;
-  }
+}
 
 const token = getToken();
 
 export const initialState: UserSliceState = {
-  authorizationStatus: token ? AuthorizationStatus.Unknown :
-    AuthorizationStatus.Unauthorized,
+  authorizationStatus: token ? AuthorizationStatus.Unknown : AuthorizationStatus.Unauthorized,
   name: '',
   avatarUrl: '',
   email: '',

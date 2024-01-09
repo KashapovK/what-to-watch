@@ -1,8 +1,8 @@
 import {configureStore} from '@reduxjs/toolkit';
 import { rootReducer } from './reducer';
-import { createAPI } from '../services/api';
+import { initAPI } from '../services/api';
 
-export const api = createAPI();
+export const api = initAPI();
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -11,5 +11,5 @@ export const store = configureStore({
       thunk: {
         extraArgument: api,
       },
-    }),
+    })
 });
